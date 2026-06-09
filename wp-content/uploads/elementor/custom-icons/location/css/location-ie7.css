@@ -1,0 +1,13 @@
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'location';
+  font-style: normal;
+  font-weight: normal;
+
+  /* fix buttons height */
+  line-height: 1em;
+
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+}
+
+.icon-390495963_d81eb448-3f7f-4041-b297-00fc89d6ad46 { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe800;&nbsp;'); }

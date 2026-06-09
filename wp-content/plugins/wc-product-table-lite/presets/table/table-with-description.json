@@ -1,0 +1,2167 @@
+{
+  "query": {
+    "category": [],
+    "orderby": "price",
+    "order": "ASC",
+    "limit": 10,
+    "paginate": true,
+    "visibility": "visible",
+    "category_export": []
+  },
+  "columns": {
+    "laptop": [
+      {
+        "name": "image",
+        "heading": {
+          "content": [
+            {
+              "id": 1775139516,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "style": [],
+                  "text": "Image",
+                  "id": 1775139517,
+                  "type": "text"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139518
+        },
+        "cell": {
+          "template": [
+            {
+              "id": 1775139519,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "size": "",
+                  "include_gallery": true,
+                  "placeholder_enabled": true,
+                  "click_action": "product_page",
+                  "zoom_trigger": "",
+                  "zoom_scale": "2.0",
+                  "custom_zoom_scale": "1.75",
+                  "icon_when": "always",
+                  "style": {
+                    "[id]": {
+                      "max-width": ""
+                    },
+                    "[id] > .wcpt-lightbox-icon": []
+                  },
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "id": 1775139520,
+                  "type": "product_image"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139521
+        }
+      },
+      {
+        "name": "name",
+        "heading": {
+          "content": [
+            {
+              "id": 1775139522,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "style": [],
+                  "text": "Name",
+                  "id": 1775139523,
+                  "type": "text"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139524
+        },
+        "cell": {
+          "template": [
+            {
+              "id": 1775139525,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "link": "product_page",
+                  "style": [],
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "id": 1775139526,
+                  "type": "title"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139527
+        }
+      },
+      {
+        "name": "description",
+        "heading": {
+          "content": [
+            {
+              "id": 1775139528,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "text": "Description",
+                  "style": [],
+                  "id": 1775139529,
+                  "type": "text"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139530
+        },
+        "cell": {
+          "template": [
+            {
+              "id": 1775139531,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "limit": "",
+                  "toggle_enabled": false,
+                  "generate": true,
+                  "show_more_label": [
+                    {
+                      "id": 1775139532,
+                      "style": [],
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "Show more (+)",
+                          "id": 1775139533
+                        }
+                      ],
+                      "type": "row"
+                    }
+                  ],
+                  "show_less_label": [
+                    {
+                      "id": 1775139534,
+                      "style": [],
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "Show less (-)",
+                          "id": 1775139535
+                        }
+                      ],
+                      "type": "row"
+                    }
+                  ],
+                  "read_more_label": [
+                    {
+                      "id": 1775139536,
+                      "style": [],
+                      "condition": [],
+                      "elements": [],
+                      "type": "row"
+                    }
+                  ],
+                  "truncation_symbol": "",
+                  "style": [],
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "id": 1775139537,
+                  "type": "short_description",
+                  "limit_by": false
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139538
+        }
+      },
+      {
+        "name": "price",
+        "heading": {
+          "content": [
+            {
+              "id": 1775139539,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "style": [],
+                  "text": "Price",
+                  "id": 1775139540,
+                  "type": "text"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139541
+        },
+        "cell": {
+          "template": [
+            {
+              "id": 1775139542,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "sale_template": [
+                    {
+                      "style": [],
+                      "elements": [
+                        {
+                          "type": "sale_price",
+                          "style": {
+                            ".wcpt-product-on-sale [id]": []
+                          },
+                          "id": 1775139543
+                        },
+                        {
+                          "type": "regular_price",
+                          "style": {
+                            ".wcpt-product-on-sale [id]": []
+                          },
+                          "id": 1775139544
+                        }
+                      ],
+                      "id": 1775139545,
+                      "type": "row"
+                    }
+                  ],
+                  "template": [
+                    {
+                      "style": [],
+                      "elements": [
+                        {
+                          "type": "regular_price",
+                          "style": {
+                            ".wcpt-product-on-sale [id]": []
+                          },
+                          "id": 1775139546
+                        }
+                      ],
+                      "id": 1775139547,
+                      "type": "row"
+                    }
+                  ],
+                  "variable_template": [
+                    {
+                      "style": [],
+                      "elements": [
+                        {
+                          "type": "lowest_price",
+                          "style": {
+                            "[id]": []
+                          },
+                          "id": 1775139548
+                        },
+                        {
+                          "type": "text",
+                          "style": {
+                            "[id]": {
+                              "margin-right": "6px"
+                            }
+                          },
+                          "text": "-",
+                          "id": 1775139549
+                        },
+                        {
+                          "type": "highest_price",
+                          "style": {
+                            "[id]": []
+                          },
+                          "id": 1775139550
+                        }
+                      ],
+                      "id": 1775139551,
+                      "type": "row"
+                    }
+                  ],
+                  "style": [],
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "id": 1775139552,
+                  "type": "price"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139553
+        }
+      },
+      {
+        "name": "quantity",
+        "heading": {
+          "content": [
+            {
+              "id": 1775139554,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "text": "Quantity",
+                  "style": [],
+                  "id": 1775139555,
+                  "type": "text"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139556
+        },
+        "cell": {
+          "template": [
+            {
+              "id": 1775139557,
+              "style": [],
+              "elements": [
+                {
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "display_type": "input",
+                  "controls": "browser",
+                  "qty_label": "Qty: ",
+                  "max_qty": 10,
+                  "initial_value": "min",
+                  "qty_warning": "Max: [max]",
+                  "min_qty_warning": "Min: [min]",
+                  "qty_step_warning": "Step: [step]",
+                  "return_to_initial": true,
+                  "style": [],
+                  "id": 1775139558,
+                  "type": "quantity"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139559
+        }
+      },
+      {
+        "name": "add to cart",
+        "heading": {
+          "content": [
+            {
+              "id": 1775139560,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "text": "Add to cart",
+                  "style": [],
+                  "id": 1775139561,
+                  "type": "text"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139562
+        },
+        "cell": {
+          "template": [
+            {
+              "id": 1775139563,
+              "style": [],
+              "elements": [
+                {
+                  "label_icon": "shopping-cart",
+                  "label_text": "Add to cart",
+                  "link": "cart_ajax",
+                  "condition": [],
+                  "id": 1775139564,
+                  "type": "cart_button"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": [],
+          "id": 1775139565
+        }
+      }
+    ],
+    "tablet": [],
+    "phone": [
+      {
+        "type": false,
+        "name": "image",
+        "heading": {
+          "content": [
+            {
+              "id": 1775139566,
+              "style": [],
+              "condition": [],
+              "elements": [],
+              "type": "row",
+              "conditon": []
+            }
+          ],
+          "style": [],
+          "id": 1775139568
+        },
+        "cell": {
+          "template": [
+            {
+              "id": 1775139569,
+              "style": [],
+              "condition": [],
+              "elements": [
+                {
+                  "lightbox_color_theme": "",
+                  "product_labels": "",
+                  "size": "",
+                  "include_gallery": true,
+                  "placeholder_enabled": true,
+                  "click_action": "product_page",
+                  "zoom_trigger": "",
+                  "zoom_scale": "2.0",
+                  "custom_zoom_scale": "1.75",
+                  "icon_when": "always",
+                  "style": {
+                    "[id]": {
+                      "margin-top": "5px"
+                    },
+                    "[id] > .wcpt-lightbox-icon": []
+                  },
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "id": 1775139570,
+                  "type": "product_image"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": {
+            "[id]": {
+              "padding-right": "0"
+            }
+          },
+          "id": 1775139571
+        }
+      },
+      {
+        "type": false,
+        "name": "details",
+        "heading": {
+          "content": [
+            {
+              "id": 1775139572,
+              "style": [],
+              "condition": [],
+              "elements": [],
+              "type": "row",
+              "conditon": []
+            }
+          ],
+          "style": [],
+          "id": 1775139574
+        },
+        "cell": {
+          "template": [
+            {
+              "id": 1775139575,
+              "style": [],
+              "elements": [
+                {
+                  "link": "product_page",
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "id": 1775139576,
+                  "type": "title",
+                  "target_new_page": false
+                }
+              ],
+              "type": "row"
+            },
+            {
+              "id": 1775139577,
+              "style": [],
+              "elements": [
+                {
+                  "limit": "",
+                  "toggle_enabled": false,
+                  "generate": true,
+                  "show_more_label": [
+                    {
+                      "id": 1775139578,
+                      "style": [],
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "Show more (+)",
+                          "id": 1775139579
+                        }
+                      ],
+                      "type": "row"
+                    }
+                  ],
+                  "show_less_label": [
+                    {
+                      "id": 1775139580,
+                      "style": [],
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "Show less (-)",
+                          "id": 1775139581
+                        }
+                      ],
+                      "type": "row"
+                    }
+                  ],
+                  "read_more_label": [
+                    {
+                      "id": 1775139582,
+                      "style": [],
+                      "condition": [],
+                      "elements": [],
+                      "type": "row"
+                    }
+                  ],
+                  "truncation_symbol": "",
+                  "style": [],
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "id": 1775139583,
+                  "type": "short_description",
+                  "limit_by": false
+                }
+              ],
+              "type": "row"
+            },
+            {
+              "id": 1775139584,
+              "style": [],
+              "elements": [
+                {
+                  "sale_template": [
+                    {
+                      "style": [],
+                      "elements": [
+                        {
+                          "type": "sale_price",
+                          "style": {
+                            ".wcpt-product-on-sale [id]": []
+                          },
+                          "id": 1775139585
+                        },
+                        {
+                          "type": "regular_price",
+                          "style": {
+                            ".wcpt-product-on-sale [id]": []
+                          },
+                          "id": 1775139586
+                        }
+                      ],
+                      "id": 1775139587,
+                      "type": "row"
+                    }
+                  ],
+                  "template": [
+                    {
+                      "style": [],
+                      "elements": [
+                        {
+                          "type": "regular_price",
+                          "style": {
+                            ".wcpt-product-on-sale [id]": []
+                          },
+                          "id": 1775139588
+                        }
+                      ],
+                      "id": 1775139589,
+                      "type": "row"
+                    }
+                  ],
+                  "variable_template": [
+                    {
+                      "style": [],
+                      "elements": [
+                        {
+                          "type": "lowest_price",
+                          "style": {
+                            "[id]": []
+                          },
+                          "id": 1775139590
+                        },
+                        {
+                          "type": "text",
+                          "style": {
+                            "[id]": {
+                              "margin-right": "6px"
+                            }
+                          },
+                          "text": "-",
+                          "id": 1775139591
+                        },
+                        {
+                          "type": "highest_price",
+                          "style": {
+                            "[id]": []
+                          },
+                          "id": 1775139592
+                        }
+                      ],
+                      "id": 1775139593,
+                      "type": "row"
+                    }
+                  ],
+                  "style": [],
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "id": 1775139594,
+                  "type": "price"
+                }
+              ],
+              "type": "row"
+            },
+            {
+              "id": 1775139595,
+              "style": [],
+              "elements": [
+                {
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "display_type": "input",
+                  "controls": "browser",
+                  "qty_label": "Qty: ",
+                  "max_qty": 10,
+                  "initial_value": "min",
+                  "qty_warning": "Max: [max]",
+                  "min_qty_warning": "Min: [min]",
+                  "qty_step_warning": "Step: [step]",
+                  "return_to_initial": true,
+                  "style": [],
+                  "id": 1775139596,
+                  "type": "quantity",
+                  "cart_button_height_match": true
+                },
+                {
+                  "style": {
+                    "[id]": {
+                      "width": "6px"
+                    }
+                  },
+                  "width": "",
+                  "condition": {
+                    "product_type": [],
+                    "user_role": []
+                  },
+                  "id": 1775139597,
+                  "type": "space__col"
+                },
+                {
+                  "label_icon": "shopping-cart",
+                  "label_text": "Add",
+                  "link": "cart_ajax",
+                  "condition": [],
+                  "id": 1775139598,
+                  "type": "cart_button"
+                }
+              ],
+              "type": "row"
+            }
+          ],
+          "style": {
+            "[id]": {
+              "padding-right": "",
+              "padding-left": ""
+            }
+          },
+          "id": 1775139599
+        }
+      }
+    ]
+  },
+  "navigation": {
+    "laptop": {
+      "header": {
+        "rows": [
+          {
+            "ratio": "flex_justified_2_columns",
+            "columns_enabled": "left-right",
+            "columns": {
+              "left": {
+                "template": [
+                  {
+                    "id": 1775139600,
+                    "style": [],
+                    "condition": [],
+                    "elements": [
+                      {
+                        "style": {
+                          "[id]": {
+                            "font-weight": "bold"
+                          }
+                        },
+                        "message": "Showing [first_result] – [last_result] of [total_results] results",
+                        "single_page_message": "Showing all [total_results] results",
+                        "single_result_message": "Showing the single result",
+                        "no_results_message": "",
+                        "id": 1775139601,
+                        "type": "result_count",
+                        "position": "header"
+                      }
+                    ],
+                    "type": "row"
+                  }
+                ]
+              },
+              "right": {
+                "template": [
+                  {
+                    "id": 1775139602,
+                    "style": [],
+                    "condition": [],
+                    "elements": [
+                      {
+                        "display_type": "dropdown",
+                        "heading": "Category",
+                        "heading_format__op_selected": "only_heading",
+                        "relabels": [
+                          {
+                            "term": "Consumer device",
+                            "ttid": 445,
+                            "label": [
+                              {
+                                "id": 1775241311,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241312,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241313
+                          },
+                          {
+                            "term": "Electronics",
+                            "ttid": 444,
+                            "label": [
+                              {
+                                "id": 1775241314,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241315,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241316
+                          },
+                          {
+                            "term": "Food",
+                            "ttid": 88,
+                            "label": [
+                              {
+                                "id": 1775241317,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241318,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241319
+                          },
+                          {
+                            "term": "Pizza",
+                            "ttid": 99,
+                            "label": [
+                              {
+                                "id": 1775241320,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241321,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241322
+                          },
+                          {
+                            "term": "Clothing",
+                            "ttid": 17,
+                            "label": [
+                              {
+                                "id": 1775241323,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241324,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241325
+                          },
+                          {
+                            "term": "Accessories",
+                            "ttid": 20,
+                            "label": [
+                              {
+                                "id": 1775241326,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241327,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241328
+                          },
+                          {
+                            "term": "Beanie",
+                            "ttid": 417,
+                            "label": [
+                              {
+                                "id": 1775241329,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241330,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241331
+                          },
+                          {
+                            "term": "Jackets",
+                            "ttid": 21,
+                            "label": [
+                              {
+                                "id": 1775241332,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241333,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241334
+                          },
+                          {
+                            "term": "Shirts",
+                            "ttid": 19,
+                            "label": [
+                              {
+                                "id": 1775241335,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241336,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241337
+                          },
+                          {
+                            "term": "Sweater",
+                            "ttid": 18,
+                            "label": [
+                              {
+                                "id": 1775241338,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241339,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241340
+                          },
+                          {
+                            "term": "Hoodies",
+                            "ttid": 413,
+                            "label": [
+                              {
+                                "id": 1775241341,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241342,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241343
+                          },
+                          {
+                            "term": "Tshirts",
+                            "ttid": 410,
+                            "label": [
+                              {
+                                "id": 1775241344,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241345,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241346
+                          },
+                          {
+                            "term": "Uncategorized",
+                            "ttid": 15,
+                            "label": [
+                              {
+                                "id": 1775241347,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241348,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241349
+                          },
+                          {
+                            "term": "Phones",
+                            "ttid": 409,
+                            "label": [
+                              {
+                                "id": 1775241350,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241351,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241352
+                          },
+                          {
+                            "term": "Wine",
+                            "ttid": 408,
+                            "label": [
+                              {
+                                "id": 1775241356,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241357,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241358
+                          },
+                          {
+                            "term": "Workshop",
+                            "ttid": 74,
+                            "label": [
+                              {
+                                "id": 1775241359,
+                                "style": [],
+                                "elements": [
+                                  {
+                                    "id": 1775241360,
+                                    "style": [],
+                                    "type": "text",
+                                    "text": "[term]"
+                                  }
+                                ],
+                                "type": "row"
+                              }
+                            ],
+                            "tooltip": "",
+                            "link": "",
+                            "target": "_self",
+                            "id": 1775241361
+                          }
+                        ],
+                        "show_all_label": "Show all",
+                        "taxonomy": "product_cat",
+                        "hide_empty": false,
+                        "pre_open_depth": 0,
+                        "click_action": false,
+                        "search_enabled": false,
+                        "search_placeholder": "Search Category",
+                        "id": 1775241311488,
+                        "type": "category_filter",
+                        "position": "header"
+                      },
+                      {
+                        "heading": "Sort by",
+                        "default_option_label": "Sort by default",
+                        "enable_icon": true,
+                        "dropdown_options": [
+                          {
+                            "orderby": "title",
+                            "order": "ASC",
+                            "meta_key": "",
+                            "label": "Sort by Name A - Z"
+                          },
+                          {
+                            "orderby": "title",
+                            "order": "DESC",
+                            "meta_key": "",
+                            "label": "Sort by Name Z - A"
+                          },
+                          {
+                            "orderby": "price",
+                            "order": "ASC",
+                            "meta_key": "",
+                            "label": "Sort by Price low to high"
+                          },
+                          {
+                            "orderby": "price-desc",
+                            "order": "DESC",
+                            "meta_key": "",
+                            "label": "Sort by Price high to low"
+                          },
+                          {
+                            "orderby": "date",
+                            "order": "DESC",
+                            "meta_key": "",
+                            "label": "Sort by Newness"
+                          }
+                        ],
+                        "id": 1775139603,
+                        "type": "sort_by",
+                        "position": "header"
+                      }
+                    ],
+                    "type": "row",
+                    "columns": {
+                      "elements": {
+                        "1": [
+                          [
+                            {
+                              "display_type": "dropdown",
+                              "heading": "Category",
+                              "heading_format__op_selected": "only_heading",
+                              "relabels": [
+                                {
+                                  "term": "Consumer device",
+                                  "ttid": 445,
+                                  "label": [
+                                    {
+                                      "id": 1775241311,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241312,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241313
+                                },
+                                {
+                                  "term": "Electronics",
+                                  "ttid": 444,
+                                  "label": [
+                                    {
+                                      "id": 1775241314,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241315,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241316
+                                },
+                                {
+                                  "term": "Food",
+                                  "ttid": 88,
+                                  "label": [
+                                    {
+                                      "id": 1775241317,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241318,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241319
+                                },
+                                {
+                                  "term": "Pizza",
+                                  "ttid": 99,
+                                  "label": [
+                                    {
+                                      "id": 1775241320,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241321,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241322
+                                },
+                                {
+                                  "term": "Clothing",
+                                  "ttid": 17,
+                                  "label": [
+                                    {
+                                      "id": 1775241323,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241324,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241325
+                                },
+                                {
+                                  "term": "Accessories",
+                                  "ttid": 20,
+                                  "label": [
+                                    {
+                                      "id": 1775241326,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241327,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241328
+                                },
+                                {
+                                  "term": "Beanie",
+                                  "ttid": 417,
+                                  "label": [
+                                    {
+                                      "id": 1775241329,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241330,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241331
+                                },
+                                {
+                                  "term": "Jackets",
+                                  "ttid": 21,
+                                  "label": [
+                                    {
+                                      "id": 1775241332,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241333,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241334
+                                },
+                                {
+                                  "term": "Shirts",
+                                  "ttid": 19,
+                                  "label": [
+                                    {
+                                      "id": 1775241335,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241336,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241337
+                                },
+                                {
+                                  "term": "Sweater",
+                                  "ttid": 18,
+                                  "label": [
+                                    {
+                                      "id": 1775241338,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241339,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241340
+                                },
+                                {
+                                  "term": "Hoodies",
+                                  "ttid": 413,
+                                  "label": [
+                                    {
+                                      "id": 1775241341,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241342,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241343
+                                },
+                                {
+                                  "term": "Tshirts",
+                                  "ttid": 410,
+                                  "label": [
+                                    {
+                                      "id": 1775241344,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241345,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241346
+                                },
+                                {
+                                  "term": "Uncategorized",
+                                  "ttid": 15,
+                                  "label": [
+                                    {
+                                      "id": 1775241347,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241348,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241349
+                                },
+                                {
+                                  "term": "Phones",
+                                  "ttid": 409,
+                                  "label": [
+                                    {
+                                      "id": 1775241350,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241351,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241352
+                                },
+                                {
+                                  "term": "Wine",
+                                  "ttid": 408,
+                                  "label": [
+                                    {
+                                      "id": 1775241356,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241357,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241358
+                                },
+                                {
+                                  "term": "Workshop",
+                                  "ttid": 74,
+                                  "label": [
+                                    {
+                                      "id": 1775241359,
+                                      "style": [],
+                                      "elements": [
+                                        {
+                                          "id": 1775241360,
+                                          "style": [],
+                                          "type": "text",
+                                          "text": "[term]"
+                                        }
+                                      ],
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "tooltip": "",
+                                  "link": "",
+                                  "target": "_self",
+                                  "id": 1775241361
+                                }
+                              ],
+                              "show_all_label": "Show all",
+                              "taxonomy": "product_cat",
+                              "hide_empty": false,
+                              "pre_open_depth": 0,
+                              "click_action": false,
+                              "search_enabled": false,
+                              "search_placeholder": "Search Category",
+                              "id": 1775241311488,
+                              "type": "category_filter",
+                              "position": "header"
+                            },
+                            {
+                              "heading": "Sort by",
+                              "default_option_label": "Sort by default",
+                              "enable_icon": true,
+                              "dropdown_options": [
+                                {
+                                  "orderby": "title",
+                                  "order": "ASC",
+                                  "meta_key": "",
+                                  "label": "Sort by Name A - Z"
+                                },
+                                {
+                                  "orderby": "title",
+                                  "order": "DESC",
+                                  "meta_key": "",
+                                  "label": "Sort by Name Z - A"
+                                },
+                                {
+                                  "orderby": "price",
+                                  "order": "ASC",
+                                  "meta_key": "",
+                                  "label": "Sort by Price low to high"
+                                },
+                                {
+                                  "orderby": "price-desc",
+                                  "order": "DESC",
+                                  "meta_key": "",
+                                  "label": "Sort by Price high to low"
+                                },
+                                {
+                                  "orderby": "date",
+                                  "order": "DESC",
+                                  "meta_key": "",
+                                  "label": "Sort by Newness"
+                                }
+                              ],
+                              "id": 1775139603,
+                              "type": "sort_by",
+                              "position": "header"
+                            }
+                          ]
+                        ],
+                        "2": [[]]
+                      }
+                    }
+                  }
+                ]
+              },
+              "center": {
+                "template": [
+                  {
+                    "id": 1775139604,
+                    "style": [],
+                    "condition": [],
+                    "elements": [],
+                    "type": "row"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "columns_enabled": "left-right",
+            "ratio": "100-0",
+            "columns": {
+              "left": {
+                "template": [
+                  {
+                    "id": 1775139605,
+                    "style": [],
+                    "condition": [],
+                    "elements": [
+                      {
+                        "reset_label": "Reset filters",
+                        "id": 1775139606,
+                        "type": "clear_filters",
+                        "border_and_padding": true,
+                        "position": "header",
+                        "style": {}
+                      }
+                    ],
+                    "type": "row"
+                  }
+                ]
+              },
+              "center": {
+                "template": [
+                  {
+                    "id": 1775139607,
+                    "style": [],
+                    "condition": [],
+                    "elements": [],
+                    "type": "row"
+                  }
+                ]
+              },
+              "right": {
+                "template": [
+                  {
+                    "id": 1775139608,
+                    "style": [],
+                    "condition": [],
+                    "elements": [],
+                    "type": "row"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "left_sidebar": [
+        {
+          "id": 1775139609,
+          "style": [],
+          "condition": [],
+          "elements": [],
+          "type": "row"
+        }
+      ]
+    },
+    "tablet": [
+      {
+        "id": 1775139610,
+        "style": [],
+        "condition": [],
+        "elements": [],
+        "type": "row"
+      }
+    ],
+    "phone": [
+      {
+        "id": 1775139611,
+        "style": [],
+        "condition": [],
+        "elements": [
+          {
+            "message": "Showing [first_result] – [last_result] of [total_results] results",
+            "single_page_message": "Showing all [total_results] results",
+            "single_result_message": "Showing the single result",
+            "no_results_message": "",
+            "style": [],
+            "id": 1775241319274,
+            "type": "result_count"
+          }
+        ],
+        "type": "row"
+      },
+      {
+        "elements": [
+          {
+            "label": [
+              {
+                "style": [],
+                "elements": [
+                  {
+                    "type": "icon",
+                    "style": [],
+                    "name": "filter",
+                    "id": 1775241322880
+                  },
+                  {
+                    "type": "text",
+                    "style": [],
+                    "text": "Filter",
+                    "id": 1775241322881
+                  }
+                ],
+                "type": "row",
+                "id": 1775241322879
+              }
+            ],
+            "style": [],
+            "id": 1775241322866,
+            "type": "filter_modal"
+          },
+          {
+            "label": [
+              {
+                "style": [],
+                "elements": [
+                  {
+                    "type": "icon",
+                    "style": [],
+                    "name": "arrows-up-down",
+                    "id": 1775241324922
+                  },
+                  {
+                    "type": "text",
+                    "style": [],
+                    "text": "Sort",
+                    "id": 1775241324923
+                  }
+                ],
+                "type": "row",
+                "id": 1775241324921
+              }
+            ],
+            "style": [],
+            "id": 1775241324908,
+            "type": "sort_modal"
+          }
+        ],
+        "id": 1775241320535,
+        "condition": [],
+        "style": [],
+        "column_count": 1,
+        "columns": {
+          "horizontal_alignment": "justify",
+          "vertical_alignment": "auto",
+          "width": "auto"
+        },
+        "type": "row"
+      },
+      {
+        "elements": [
+          {
+            "reset_label": "Reset filters",
+            "id": 1775241327664,
+            "type": "clear_filters",
+            "border_and_padding": true
+          }
+        ],
+        "id": 1775241326125,
+        "condition": [],
+        "style": [],
+        "column_count": 1,
+        "columns": {
+          "horizontal_alignment": "justify",
+          "vertical_alignment": "auto",
+          "width": "auto"
+        },
+        "type": "row"
+      }
+    ]
+  },
+  "navigation_settings": {
+    "disableUrlUpdate": true,
+    "autoScroll": ["laptop", "tablet", "phone"],
+    "paginationShowPrevNextIcons": false,
+    "paginationShowFirstLastIcons": true,
+    "paginationShowFirstLastNumbers": false,
+    "dynamicFilterTypes": [
+      "category",
+      "attribute",
+      "favorite",
+      "onSale",
+      "availability",
+      "tag",
+      "taxonomy",
+      "brand"
+    ]
+  },
+  "style": {
+    "css": "",
+    "laptop": {
+      "[container] thead .wcpt-heading": {
+        "text-align": "left"
+      },
+      "[container] .wcpt-table": {
+        "border-top-width": "1px",
+        "border-bottom-width": "1px"
+      },
+      "[container] .wcpt-heading-row": {
+        "border-bottom-width": "1px"
+      }
+    },
+    "tablet": {
+      "inherit_laptop_style": true
+    },
+    "phone": {
+      "inherit_tablet_style": false,
+      "[container]": {
+        "word-break": ""
+      },
+      "[container] .wcpt-cell": {
+        "padding-top": "20px",
+        "padding-right": "",
+        "padding-bottom": "20px",
+        "vertical-align": "top"
+      },
+      "[container] .wcpt-table": {
+        "border-top-width": "",
+        "border-bottom-width": ""
+      },
+      "[container].wcpt-list-view": {
+        "list_layout_enabled": "true"
+      }
+    },
+    "navigation": []
+  },
+  "elements": {
+    "column": [],
+    "navigation": []
+  },
+  "version": "4.9.0",
+  "timestamp": 1775910694,
+  "id": 7592,
+  "title": "Preset: Table with description",
+  "query_v2": {
+    "showProOptions": true,
+    "categoryIds": [],
+    "orderBy": "title",
+    "order": "ASC",
+    "limit": 10,
+    "paginate": true
+  },
+  "grid": {
+    "enable": false,
+    "primary_view": ["laptop", "tablet", "phone"],
+    "cell_template": [
+      {
+        "id": 1775118809,
+        "style": [],
+        "condition": [],
+        "elements": [
+          {
+            "size": "thumbnail",
+            "placeholder_enabled": true,
+            "click_action": "product_page",
+            "zoom_trigger": "",
+            "zoom_scale": "2.0",
+            "custom_zoom_scale": "1.75",
+            "icon_when": "always",
+            "style": {
+              "[id]": {
+                "max-width": ""
+              },
+              "[id] > .wcpt-lightbox-icon": []
+            },
+            "condition": {
+              "product_type": [],
+              "user_role": []
+            },
+            "id": 1775118810,
+            "type": "product_image"
+          }
+        ],
+        "type": "row"
+      },
+      {
+        "elements": [
+          {
+            "link": "product_page",
+            "custom_field": "",
+            "custom_field_default_product_page": true,
+            "style": [],
+            "condition": {
+              "product_type": [],
+              "user_role": []
+            },
+            "id": 1775118811,
+            "type": "title"
+          }
+        ],
+        "id": 1775118812,
+        "condition": [],
+        "style": [],
+        "type": "row"
+      },
+      {
+        "elements": [
+          {
+            "sale_template": [
+              {
+                "style": [],
+                "elements": [
+                  {
+                    "type": "sale_price",
+                    "style": {
+                      ".wcpt-product-on-sale [id]": []
+                    },
+                    "id": 1775118813
+                  },
+                  {
+                    "type": "regular_price",
+                    "style": {
+                      ".wcpt-product-on-sale [id]": []
+                    },
+                    "id": 1775118814
+                  }
+                ],
+                "id": 1775118815,
+                "type": "row"
+              }
+            ],
+            "template": [
+              {
+                "style": [],
+                "elements": [
+                  {
+                    "type": "regular_price",
+                    "style": {
+                      ".wcpt-product-on-sale [id]": []
+                    },
+                    "id": 1775118816
+                  }
+                ],
+                "id": 1775118817,
+                "type": "row"
+              }
+            ],
+            "variable_template": [
+              {
+                "style": [],
+                "elements": [
+                  {
+                    "type": "lowest_price",
+                    "style": {
+                      "[id]": []
+                    },
+                    "id": 1775118818
+                  },
+                  {
+                    "type": "text",
+                    "style": {
+                      "[id]": {
+                        "margin-right": "6px"
+                      }
+                    },
+                    "text": "-",
+                    "id": 1775118819
+                  },
+                  {
+                    "type": "highest_price",
+                    "style": {
+                      "[id]": []
+                    },
+                    "id": 1775118820
+                  }
+                ],
+                "id": 1775118821,
+                "type": "row"
+              }
+            ],
+            "style": {
+              "[id]": {
+                "color": "rgb(20, 162, 20)"
+              }
+            },
+            "condition": {
+              "product_type": [],
+              "user_role": []
+            },
+            "id": 1775118822,
+            "type": "price"
+          }
+        ],
+        "id": 1775118823,
+        "condition": [],
+        "style": [],
+        "type": "row"
+      },
+      {
+        "elements": [
+          {
+            "limit": "10",
+            "toggle_enabled": true,
+            "show_more_label": [
+              {
+                "id": 1775118824,
+                "style": [],
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Show more (+)",
+                    "id": 1775118825
+                  }
+                ],
+                "type": "row"
+              }
+            ],
+            "show_less_label": [
+              {
+                "id": 1775118826,
+                "style": [],
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Show less (-)",
+                    "id": 1775118827
+                  }
+                ],
+                "type": "row"
+              }
+            ],
+            "read_more_label": [
+              {
+                "id": 1775118828,
+                "style": [],
+                "condition": [],
+                "elements": [],
+                "type": "row"
+              }
+            ],
+            "truncation_symbol": "",
+            "style": [],
+            "condition": {
+              "product_type": [],
+              "user_role": []
+            },
+            "id": 1775118829,
+            "type": "short_description"
+          }
+        ],
+        "id": 1775118830,
+        "condition": [],
+        "style": [],
+        "type": "row"
+      },
+      {
+        "elements": [
+          {
+            "condition": {
+              "product_type": [],
+              "user_role": []
+            },
+            "display_type": "input",
+            "controls": "browser",
+            "qty_label": "Qty: ",
+            "max_qty": 10,
+            "initial_value": "min",
+            "qty_warning": "Max: [max]",
+            "min_qty_warning": "Min: [min]",
+            "qty_step_warning": "Step: [step]",
+            "return_to_initial": true,
+            "style": [],
+            "id": 1775118831,
+            "type": "quantity"
+          },
+          {
+            "label": [
+              {
+                "id": 1775118832,
+                "style": [],
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Buy here",
+                    "id": 1775118833
+                  }
+                ],
+                "type": "row"
+              }
+            ],
+            "target": "_self",
+            "custom_field": "",
+            "link": "cart_ajax",
+            "custom_field_empty_relabel": [
+              {
+                "id": 1775118834,
+                "style": [],
+                "condition": [],
+                "elements": [],
+                "type": "row"
+              }
+            ],
+            "use_default_template": false,
+            "condition": {
+              "product_type": [],
+              "user_role": []
+            },
+            "id": 1775118835,
+            "type": "button"
+          }
+        ],
+        "id": 1775118836,
+        "condition": [],
+        "style": [],
+        "type": "row"
+      }
+    ],
+    "style": {
+      "laptop_columns": "3",
+      "tablet_columns": "2",
+      "phone_columns": "1",
+      "laptop_gap": "10",
+      "tablet_gap": "5",
+      "phone_gap": "5",
+      "[grid_cell]": []
+    }
+  }
+}

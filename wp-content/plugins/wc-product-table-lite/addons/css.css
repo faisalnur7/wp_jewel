@@ -1,0 +1,80 @@
+h1#addons-page-heading {
+  font-size: 35px;
+  display: inline-block;
+  margin: 1.5em 0 0.1em;
+}
+
+p#addons-page-description {
+  font-size: 18px;
+  margin-bottom: 2em;
+}
+
+:root {
+  --addon-grid-gap: 30px;
+  --addon-accent-color: #228be6;
+}
+
+.addons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--addon-grid-gap);
+  max-width: 900px;
+  box-sizing: content-box;
+}
+
+.addon {
+  flex-basis: calc(50% - calc(var(--addon-grid-gap) / 2));
+  padding: 20px;
+  background: white;
+  box-shadow: 2px 2px 4px rgb(0 0 0 / 10%);
+  border: 2px solid #fff;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  box-sizing: border-box;
+  font-family: Ubuntu, verdana, sans-serif;
+  text-decoration: none;
+}
+
+.addon:hover {
+  box-shadow: 2px 2px 4px rgb(0 0 0 / 20%);
+  border-color: var(--addon-accent-color);
+}
+
+.addon__thumb {
+  max-width: 100%;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.addon__name {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--addon-accent-color);
+  display: block;
+  margin: 0 0 1em;
+}
+
+.addon__description {
+  display: block;
+  margin-bottom: 1em;
+  text-align: center;
+  color: #777;
+  font-size: 16px;
+  line-height: 1.4em;
+}
+
+@media (max-width: 750px) {
+  .addon {
+    flex-basis: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 25px;
+  }
+
+  .addons-grid {
+    justify-content: center;
+  }
+}

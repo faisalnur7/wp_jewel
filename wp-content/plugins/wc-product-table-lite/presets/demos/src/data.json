@@ -1,0 +1,241 @@
+{
+  "spare-parts": {
+    "name": "Spare Parts",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    "icon": "spare-parts.svg",
+    "archive_url": "https://pro.demo.wcproducttable.com/spare-parts-shop-downloadable-demos/",
+    "images": [
+      {
+        "name": "Standard table",
+        "demo_url": "https://pro.demo.wcproducttable.com/spare-parts-standard-table/",
+        "image_url": "Spare-Parts-Demo-1.webp"
+      },
+      {
+        "name": "Quick order table",
+        "demo_url": "https://pro.demo.wcproducttable.com/spare-parts-quick-order-table/",
+        "image_url": "Spare-Parts-Demo-2.webp"
+      },
+      {
+        "name": "Table with child rows",
+        "demo_url": "https://pro.demo.wcproducttable.com/spare-parts-table-with-child-rows/",
+        "image_url": "Spare-Parts-Demo-3.webp"
+      },
+      {
+        "name": "Table with sticky columns",
+        "demo_url": "https://pro.demo.wcproducttable.com/spare-parts-table-with-sticky-columns/",
+        "image_url": "Spare-Parts-Demo-4.webp"
+      },
+      {
+        "name": "List layout with property column",
+        "demo_url": "https://pro.demo.wcproducttable.com/spare-parts-list-layout-with-property-column/",
+        "image_url": "Spare-Parts-Demo-5.webp"
+      },
+      {
+        "name": "List layout with property grid",
+        "demo_url": "https://pro.demo.wcproducttable.com/spare-parts-list-layout-with-property-grid/",
+        "image_url": "Spare-Parts-Demo-6.webp"
+      }
+    ]
+  },
+  "electronics": {
+    "name": "Electronics",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    "icon": "electronics.svg",
+    "archive_url": "https://pro.demo.wcproducttable.com/electronics-shop-downloadable-demos/",
+    "images": [
+      {
+        "name": "Standard table",
+        "demo_url": "https://pro.demo.wcproducttable.com/electronics-standard-table/",
+        "image_url": "Electronics-Demo-1.webp"
+      },
+      {
+        "name": "Quick order table",
+        "demo_url": "https://pro.demo.wcproducttable.com/electronics-quick-order-table/",
+        "image_url": "Electronics-Demo-2.webp"
+      },
+      {
+        "name": "Table with child rows",
+        "demo_url": "https://pro.demo.wcproducttable.com/electronics-table-with-child-rows/",
+        "image_url": "Electronics-Demo-3.webp"
+      },
+      {
+        "name": "Table with sticky columns",
+        "demo_url": "https://pro.demo.wcproducttable.com/electronics-sticky-column-table/",
+        "image_url": "Electronics-Demo-4.webp"
+      },
+      {
+        "name": "List layout with property column",
+        "demo_url": "https://pro.demo.wcproducttable.com/electronics-list-layout-with-property-column/",
+        "image_url": "Electronics-Demo-5.webp"
+      },
+      {
+        "name": "List layout with property grid",
+        "demo_url": "https://pro.demo.wcproducttable.com/electronics-list-layout-with-property-grid/",
+        "image_url": "Electronics-Demo-6.webp"
+      }
+    ]
+  },
+  "wine": {
+    "name": "Wine",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    "icon": "wine.svg",
+    "archive_url": "https://pro.demo.wcproducttable.com/wine-shop-downloadable-demos/",
+    "images": [
+      {
+        "name": "Standard table",
+        "demo_url": "https://pro.demo.wcproducttable.com/wine-standard-table/",
+        "image_url": "Wine-Demo-1.webp"
+      },
+      {
+        "name": "Quick order table",
+        "demo_url": "https://pro.demo.wcproducttable.com/wine-quick-order-table/",
+        "image_url": "Wine-Demo-2.webp"
+      },
+      {
+        "name": "Table with child rows",
+        "demo_url": "https://pro.demo.wcproducttable.com/wine-table-with-child-rows/",
+        "image_url": "Wine-Demo-3.webp"
+      },
+      {
+        "name": "Table with sticky columns",
+        "demo_url": "https://pro.demo.wcproducttable.com/wine-sticky-column-table/",
+        "image_url": "Wine-Demo-4.webp"
+      },
+      {
+        "name": "List layout with property column",
+        "demo_url": "https://pro.demo.wcproducttable.com/wine-list-layout-with-property-column/",
+        "image_url": "Wine-Demo-5.webp"
+      },
+      {
+        "name": "List layout with property grid",
+        "demo_url": "https://pro.demo.wcproducttable.com/wine-list-layout-with-property-grid/",
+        "image_url": "Wine-Demo-6.webp"
+      }
+    ]
+  },
+  "tyre": {
+    "name": "Tyre",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    "icon": "tyre.svg",
+    "archive_url": "https://pro.demo.wcproducttable.com/tires-shop-downloadable-demos/",
+    "images": [
+      {
+        "name": "Standard Table",
+        "demo_url": "https://pro.demo.wcproducttable.com/tires-standard-table/",
+        "image_url": "Tires-Demo-1.webp"
+      },
+      {
+        "name": "Table with sticky columns",
+        "demo_url": "https://pro.demo.wcproducttable.com/tires-table-with-sticky-columns/",
+        "image_url": "Tires-Demo-2.webp"
+      },
+      {
+        "name": "List layout with sidebar",
+        "demo_url": "https://pro.demo.wcproducttable.com/tires-list-layout-with-property-table/",
+        "image_url": "Tires-Demo-3.webp"
+      },
+      {
+        "name": "Grid/table view switcher",
+        "demo_url": "https://pro.demo.wcproducttable.com/tires-grid-table-layout/",
+        "image_url": "Tires-Demo-4.webp"
+      }
+    ]
+  },
+  "audio": {
+    "name": "Audio",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    "icon": "audio.svg",
+    "archive_url": "https://pro.demo.wcproducttable.com/audio-shop-downloadable-demos/",
+    "images": [
+      {
+        "name": "Standard table",
+        "demo_url": "https://pro.demo.wcproducttable.com/audio-standard-table/",
+        "image_url": "Audio-Demo-1.webp"
+      },
+      {
+        "name": "Table with sidebar",
+        "demo_url": "https://pro.demo.wcproducttable.com/audio-table-with-sidebar/",
+        "image_url": "Audio-Demo-2.webp"
+      },
+      {
+        "name": "Compact table",
+        "demo_url": "https://audio.demo.wcproducttable.com/album-view/",
+        "image_url": "Audio-Demo-3.webp"
+      },
+      {
+        "name": "Large table",
+        "demo_url": "https://audio.demo.wcproducttable.com/",
+        "image_url": "Audio-Demo-4.webp"
+      }
+    ]
+  },
+  "domains": {
+    "name": "Domains",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    "icon": "domains.svg",
+    "archive_url": "https://pro.demo.wcproducttable.com/domain-reseller-downloadable-demos/",
+    "images": [
+      {
+        "name": "Standard Table",
+        "demo_url": "https://pro.demo.wcproducttable.com/domain-names-standard-layout/",
+        "image_url": "Domains-Demo-1.webp"
+      },
+      {
+        "name": "List layout with property column",
+        "demo_url": "https://pro.demo.wcproducttable.com/domain-names-list-layout-with-property-column/",
+        "image_url": "Domains-Demo-2.webp"
+      }
+    ]
+  },
+  "food": {
+    "name": "Food",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    "icon": "food.svg",
+    "archive_url": "https://pro.demo.wcproducttable.com/food-shop-downloadable-demos/",
+    "images": [
+      {
+        "name": "Table with 2 columns",
+        "demo_url": "https://food.demo.wcproducttable.com/demo-1/",
+        "image_url": "Food-Demo-1.webp"
+      },
+      {
+        "name": "Table with Variation columns",
+        "demo_url": "https://food.demo.wcproducttable.com/demo-2/",
+        "image_url": "Food-Demo-2.webp"
+      },
+      {
+        "name": "Table with add-on options",
+        "demo_url": "https://food.demo.wcproducttable.com/demo-3/",
+        "image_url": "Food-Demo-3.webp"
+      },
+      {
+        "name": "List layout",
+        "demo_url": "https://food.demo.wcproducttable.com/demo-4/",
+        "image_url": "Food-Demo-4.webp"
+      }
+    ]
+  },
+  "general": {
+    "name": "General",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    "icon": "general.svg",
+    "archive_url": "https://pro.demo.wcproducttable.com/general-purpose-downloadable-demos/",
+    "images": [
+      {
+        "name": "Standard Table",
+        "demo_url": "https://pro.demo.wcproducttable.com/general-standard-table/",
+        "image_url": "General-Demo-1.webp"
+      },
+      {
+        "name": "Table with live totalling",
+        "demo_url": "https://demo2.wcproducttable.com/general-demo-1-2/",
+        "image_url": "General-Demo-2.webp"
+      },
+      {
+        "name": "List layout",
+        "demo_url": "https://demo2.wcproducttable.com/general-demo-2-2/",
+        "image_url": "General-Demo-3.webp"
+      }
+    ]
+  }
+}

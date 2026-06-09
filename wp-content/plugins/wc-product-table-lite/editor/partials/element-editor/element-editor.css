@@ -1,0 +1,295 @@
+.wcpt-column-settings {
+  border: 1px solid #eaeaea;
+  padding: 30px;
+  margin-bottom: 60px;
+  background: #f7f7f7;
+  position: relative;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.wcpt-column-settings .wcpt-editor-row-contract {
+  display: none !important;
+}
+
+.wcpt-column-settings.wcpt-toggle-column-expand {
+  max-height: none;
+}
+
+.wcpt-column-toggle-capture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 180px);
+  height: 80px;
+  cursor: pointer;
+}
+
+/* no columns for device message */
+.wcpt-no-device-columns-message {
+  display: block;
+  padding: 20px 30px;
+  background: rgb(255 235 59 / 50%);
+  box-shadow:
+    0 0 5px #fff inset,
+    0 0 5px #f3eded;
+  border-radius: 4px;
+  border: 1px solid #00000008;
+  color: #000000;
+  width: 625px;
+  margin: 0 auto 40px;
+  line-height: 1.6em;
+  text-shadow: 1px 1px #ffffff8a;
+}
+
+/* column settings > name  */
+
+.wcpt-column-setttings__top-left {
+  --wcpt-primary-color: #5a5a5a;
+  --wcpt-border-color: #e0e0e0;
+  --wcpt-background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 2px);
+  background-color: white;
+  border: 1px solid var(--wcpt-border-color);
+  margin: 10px 0 0;
+  position: relative;
+}
+
+.wcpt-column-setttings__top-left .wcpt-column-name-label {
+  white-space: nowrap;
+  color: var(--wcpt-primary-color);
+  padding: 0 14px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.wcpt-column-setttings__top-left .wcpt-column-name-input {
+  flex: 1;
+  height: 46px;
+  padding: 0 12px;
+  font-size: 16px;
+  border: none;
+  border-left: 1px solid var(--wcpt-border-color);
+  border-radius: 0;
+  color: #333;
+}
+
+.wcpt-column-setttings__top-left .wcpt-column-name-input::placeholder {
+  color: #aaa;
+}
+
+.wcpt-column-setttings__top-left .wcpt-column-name-input.wcpt-diw--disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background-color: #f1f1f1;
+}
+
+input.wcpt-column-name-input,
+input.wcpt-column-name-input:hover,
+input.wcpt-column-name-input:focus,
+input.wcpt-column-name-input:active {
+  outline: none !important;
+  border-color: var(--wcpt-border-color) !important;
+  box-shadow: none;
+}
+
+/* ./column name */
+
+.wcpt-editor-tab-columns .wcpt-column-device-icon-container {
+  width: 35px;
+  height: 40px;
+  position: relative;
+  opacity: 0.75;
+  display: inline-block;
+}
+
+.wcpt-editor-light-heading .wcpt-column-device-icon {
+  vertical-align: middle;
+  margin: 5px;
+  position: relative;
+  top: -2px;
+}
+
+.wcpt-column-device-down-arrow {
+  font-size: 18px;
+  color: #aaa;
+}
+
+.wcpt-editor-tab-columns
+  .wcpt-column-device-icon-container
+  > .wcpt-column-device-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.wcpt-editor-tab-columns img.wcpt-column-device-icon--laptop,
+.wcpt-editor-tab-columns
+  .wcpt-column-device-icon-container
+  > img.wcpt-column-device-icon--laptop {
+  border-bottom: 3px solid black !important;
+  border-radius: 2px;
+}
+
+.wcpt-editor-tab-columns .wcpt-column-device-icon--tablet {
+  width: 30px;
+}
+
+.wcpt-column-settings__index {
+  position: absolute;
+  top: -8px;
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #999999;
+  transform: translateY(-50%);
+  font-weight: bold;
+}
+
+.wcpt-column-index i {
+  font-style: normal !important;
+  margin-left: 4px;
+  font-size: 1em;
+  /* background: #ffffff;
+color: #000000;
+width: 1em;
+height: 1em;
+display: inline-block;
+text-align: center;
+border-radius: 100%;
+padding: 6px;
+box-sizing: content-box !important;
+line-height: 1em;
+border: 1px solid #efefef;
+vertical-align: baseline; */
+}
+
+.wcpt-column-settings .wcpt-editor-corner-options {
+  position: absolute;
+  top: -8px;
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #999999;
+  transform: translateY(-50%);
+  font-weight: bold;
+}
+
+.wcpt-column-settings .wcpt-editor-corner-options > i {
+  font-size: 16px;
+}
+
+.wcpt-column-settings > .wcpt-tabs > .wcpt-tab-triggers > .wcpt-tab-trigger {
+  font-size: 18px;
+}
+
+[wcpt-model-key="columns"] .wcpt-editor-columns-container > .wcpt-button {
+  margin: 0 auto 50px !important;
+  padding: 12px 16px;
+  font-size: 22px;
+  display: block;
+  background: #2196f3 !important;
+  color: white;
+  border-radius: 4px;
+}
+
+[wcpt-model-key="columns"] .wcpt-button[wcpt-add-row-template="csv_columns"] {
+  margin: 0 auto 10px !important;
+}
+
+[wcpt-model-key="columns"] .wcpt-button > .wcpt-icon {
+  margin-right: 5px;
+  position: relative;
+  top: 1px;
+  opacity: 0.9;
+}
+
+/* active prop count feedback */
+.wcpt-editor-active-option {
+  background: rgba(3, 169, 244, 0.1) !important;
+  border-color: rgb(3, 169, 244) !important;
+  outline: 1px solid rgb(3, 169, 244) !important;
+}
+
+.wcpt-editor-active-props-count {
+  border-radius: 6px;
+  display: inline-block;
+  font-size: 14px;
+  position: absolute;
+  right: 20px;
+  color: #555;
+}
+
+.wcpt-editor-active-props-count:after {
+  content: " ";
+  width: 10px;
+  height: 10px;
+  background: rgb(3, 169, 244);
+  border-radius: 100%;
+  display: inline-block;
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 1px inset white;
+}
+
+.wcpt-tab-trigger .wcpt-editor-active-props-count,
+.wcpt-tab-trigger .wcpt-editor-active-props-count:after {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  transform: none;
+}
+
+.wcpt-block-editor-edit-row--has-settings:after {
+  content: " ";
+  width: 10px;
+  height: 10px;
+  background: rgb(3, 169, 244);
+  border-radius: 100%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-shadow: 0 0 1px inset white;
+}
+
+.wcpt-separator-editor span {
+  font-family: consolas;
+}
+
+/* element editor tabs */
+
+/* .wcpt-element-editor-tabs {
+  display: flex;
+  gap: 12px;
+  padding: 10px 10px;
+  margin-top: 1em;
+  font-size: 12px;
+  border: 1px solid #eeeeee;
+  border-radius: 8px;
+  line-height: 1.4em;
+}
+
+.wcpt-element-editor-tab {
+  cursor: pointer;
+  border-bottom: 2px solid #eee;
+}
+
+.wcpt-element-editor-tab[data-active="true"] {
+  border-bottom: 2px solid #777;
+}
+
+.wcpt-element-editor-tab-hide-content {
+  display: none !important;
+} */
