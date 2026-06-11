@@ -1,0 +1,438 @@
+.ccvt-form {
+    margin: 1.5em 0 0;
+    color: #0f172a;
+}
+
+.ccvt-shell {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.06);
+}
+
+.ccvt-notices {
+    margin-bottom: 1rem;
+}
+
+.ccvt-notice {
+    padding: 0.9rem 1rem;
+    border-radius: 0.875rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.ccvt-notice-success {
+    background: #ecfdf5;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.ccvt-notice-error {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+.ccvt-table-wrap {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+}
+
+.ccvt-variation-table {
+    width: 100%;
+    /* border-collapse: separate; */
+    border-spacing: 0;
+    margin: 0;
+}
+
+.ccvt-variation-table th,
+.ccvt-variation-table td {
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+    border: 0 !important;
+}
+
+.ccvt-variation-table th {
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    color: #475569;
+    background: #f8fafc;
+}
+
+.ccvt-variation-row:last-child td {
+    border-bottom: 0;
+}
+
+.ccvt-variation-row:hover td {
+    background: #f8fafc;
+}
+
+.ccvt-variation-image {
+    width: 104px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0 !important;
+}
+
+.ccvt-variation-image img,
+.ccvt-variation-image svg {
+    width: 78px;
+    height: 78px;
+    object-fit: cover;
+    border-radius: 14px !important;
+    display: block;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+.ccvt-variation-label {
+    display: block;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.5;
+}
+
+.ccvt-stock-status {
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    color: #b45309;
+}
+
+.ccvt-variation-row.ccvt-out-of-stock {
+    opacity: 0.56;
+}
+
+.ccvt-qty-control {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 0;
+    min-width: 196px;
+    max-width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.ccvt-qty-button {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    background: #f8fafc;
+    border: 0;
+    color: #334155;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 1;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+}
+
+.ccvt-qty-button:hover:not(:disabled) {
+    background: #e2e8f0;
+    color: #0f172a;
+    transform: none;
+}
+
+.ccvt-qty-button:active:not(:disabled) {
+    background: #cbd5e1;
+}
+
+.ccvt-qty-button:focus-visible {
+    outline: 2px solid rgba(37, 99, 235, 0.22);
+    outline-offset: -1px;
+}
+
+.ccvt-qty-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    transform: none;
+}
+
+.ccvt-variation-qty {
+    width: 100%;
+    min-width: 84px;
+    border: 0;
+    border-left: 1px solid #cbd5e1;
+    border-right: 1px solid #cbd5e1;
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 0.55rem 0.8rem;
+    background: #fff;
+    color: #0f172a;
+    appearance: textfield;
+}
+
+.ccvt-variation-qty:focus {
+    outline: 2px solid rgba(37, 99, 235, 0.2);
+    outline-offset: -1px;
+    box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.08);
+}
+
+.ccvt-variation-qty::-webkit-outer-spin-button,
+.ccvt-variation-qty::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ccvt-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.ccvt-summary {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    color: #334155;
+}
+
+.ccvt-summary-label {
+    font-size: 0.95rem;
+}
+
+.ccvt-total-items {
+    font-size: 1.05rem;
+}
+
+.ccvt-add-to-cart {
+    min-width: 240px;
+    padding: 0.95rem 1.25rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border: 0;
+    box-shadow: 0 12px 26px rgba(37, 99, 235, 0.24);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.ccvt-add-to-cart:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 30px rgba(37, 99, 235, 0.3);
+}
+
+.ccvt-grouped-heading {
+    margin-bottom: 1rem;
+}
+
+.ccvt-grouped-range {
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.03em;
+}
+
+.ccvt-grouped-table th:last-child,
+.ccvt-grouped-table td:last-child {
+    text-align: right;
+}
+
+.ccvt-grouped-product-card {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.ccvt-grouped-product-image img,
+.ccvt-grouped-product-image svg {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+}
+
+.ccvt-grouped-product-label {
+    display: block;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.ccvt-grouped-price-value {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+.ccvt-grouped-quantity {
+    min-width: 180px;
+}
+
+.ccvt-grouped-qty-control {
+    min-width: 0;
+    width: 156px;
+    margin-left: auto;
+    border-radius: 10px;
+    border-color: #cbd5e1;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.ccvt-grouped-qty-button {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    background: #f8fafc;
+    color: #334155;
+    font-size: 1.05rem;
+    font-weight: 700;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+}
+
+.ccvt-grouped-qty-button:hover:not(:disabled) {
+    background: #e2e8f0;
+    color: #0f172a;
+    transform: none;
+}
+
+.ccvt-grouped-qty-button:active:not(:disabled) {
+    background: #cbd5e1;
+}
+
+.ccvt-grouped-qty-button:focus-visible {
+    outline: 2px solid rgba(37, 99, 235, 0.22);
+    outline-offset: -1px;
+}
+
+.ccvt-grouped-qty-input {
+    width: 68px;
+    min-width: 0;
+    border: 0;
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 700;
+    background: #fff;
+    color: #0f172a;
+    appearance: textfield;
+}
+
+.ccvt-grouped-qty-input:focus {
+    outline: 2px solid rgba(37, 99, 235, 0.2);
+    outline-offset: -1px;
+    box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.08);
+}
+
+.ccvt-grouped-qty-input::-webkit-outer-spin-button,
+.ccvt-grouped-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ccvt-grouped-footer {
+    align-items: center;
+}
+
+.ccvt-grouped-summary {
+    gap: 0.35rem;
+    font-size: 1rem;
+}
+
+.ccvt-summary-separator {
+    opacity: 0.5;
+}
+
+.ccvt-grouped-unavailable {
+    display: inline-block;
+    color: #64748b;
+    font-size: 0.92rem;
+}
+
+.ccvt-button-count {
+    font-weight: 700;
+}
+
+.ccvt-loading {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+@media screen and (max-width: 720px) {
+    .ccvt-shell {
+        padding: 0.75rem;
+    }
+
+    .ccvt-variation-table thead {
+        display: none !important;
+    }
+
+    .ccvt-variation-table,
+    .ccvt-variation-table tbody,
+    .ccvt-variation-table tr,
+    .ccvt-variation-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .ccvt-variation-table tr {
+        padding: 0.9rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .ccvt-variation-table td {
+        border-bottom: 0;
+        padding: 0.45rem;
+    }
+
+    .ccvt-variation-image {
+        width: auto;
+    }
+
+    .ccvt-variation-row {
+        display: grid;
+        grid-template-columns: 84px 1fr;
+        gap: 0.75rem;
+        align-items: center;
+    }
+
+    .ccvt-variation-quantity {
+        /* grid-column: 1 / -1; */
+    }
+
+    .ccvt-qty-control {
+        width: 100%;
+    }
+
+    .ccvt-footer {
+        align-items: stretch;
+    }
+
+    .ccvt-grouped-range {
+        font-size: 1.6rem;
+    }
+
+    .ccvt-grouped-table th:last-child,
+    .ccvt-grouped-table td:last-child {
+        text-align: left;
+    }
+
+    .ccvt-grouped-product-card {
+        align-items: flex-start;
+    }
+
+    .ccvt-grouped-quantity {
+        min-width: 0;
+    }
+
+    .ccvt-grouped-qty-control {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .ccvt-summary,
+    .ccvt-add-to-cart {
+        width: 100%;
+        justify-content: center;
+    }
+}
