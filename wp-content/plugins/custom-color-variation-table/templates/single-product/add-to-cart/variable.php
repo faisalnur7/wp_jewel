@@ -93,18 +93,20 @@ foreach ( $variation_ids as $variation_id ) {
         $image = wc_placeholder_img( 'thumbnail' );
     }
 
-    $in_stock = $variation->is_in_stock();
-    $max_qty = $variation->get_max_purchase_quantity();
-    $stock_qty = $variation->managing_stock() ? $variation->get_stock_quantity() : 0;
+	$in_stock = $variation->is_in_stock();
+	$max_qty = $variation->get_max_purchase_quantity();
+	$stock_qty = $variation->managing_stock() ? $variation->get_stock_quantity() : 0;
+	$price_html = $variation->get_price_html();
 
-    $variations[] = array(
-        'id'         => $variation_id,
-        'label'      => $label,
-        'image'      => $image,
-        'in_stock'   => $in_stock,
-        'max_qty'    => $max_qty,
-        'stock_qty'  => $stock_qty,
-        'permalink'  => $variation->get_permalink(),
+	$variations[] = array(
+		'id'         => $variation_id,
+		'label'      => $label,
+		'image'      => $image,
+		'price_html' => $price_html,
+		'in_stock'   => $in_stock,
+		'max_qty'    => $max_qty,
+		'stock_qty'  => $stock_qty,
+		'permalink'  => $variation->get_permalink(),
         'variation'  => $variation,
     );
 }
@@ -124,24 +126,29 @@ foreach ( $variation_ids as $variation_id ) {
             <table class="ccvt-variation-table" cellspacing="0" role="presentation">
                 <thead>
                     <tr>
-                        <th><?php esc_html_e( 'Variation', 'custom-color-variation-table' ); ?></th>
-                        <th><?php esc_html_e( 'Color', 'custom-color-variation-table' ); ?></th>
-                        <th><?php esc_html_e( 'Quantity', 'custom-color-variation-table' ); ?></th>
+                        <th class="color-th"><?php esc_html_e( 'Color', 'custom-color-variation-table' ); ?></th>
+                        <th class="price-th"><?php esc_html_e( 'Price', 'custom-color-variation-table' ); ?></th>
+                        <th class="quantity-th"><?php esc_html_e( 'Quantity', 'custom-color-variation-table' ); ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ( $variations as $data ) : ?>
                         <tr class="ccvt-variation-row<?php echo $data['in_stock'] ? '' : ' ccvt-out-of-stock'; ?>">
-                            <td class="ccvt-variation-image">
-                                <?php echo wp_kses_post( $data['image'] ); ?>
+                            <td class="ccvt-variation-cell ccvt-variation-meta">
+                                <span class="ccvt-variation-image">
+                                    <?php echo wp_kses_post( $data['image'] ); ?>
+                                </span>
+                                <span class="ccvt-variation-copy">
+                                    <span class="ccvt-variation-label"><?php echo esc_html( $data['label'] ); ?></span>
+                                    <?php if ( ! $data['in_stock'] ) : ?>
+                                        <span class="ccvt-stock-status"><?php esc_html_e( 'Out of stock', 'custom-color-variation-table' ); ?></span>
+                                    <?php endif; ?>
+                                </span>
                             </td>
-                            <td class="ccvt-variation-name">
-                                <span class="ccvt-variation-label"><?php echo esc_html( $data['label'] ); ?></span>
-                                <?php if ( ! $data['in_stock'] ) : ?>
-                                    <div class="ccvt-stock-status"><?php esc_html_e( 'Out of stock', 'custom-color-variation-table' ); ?></div>
-                                <?php endif; ?>
+                            <td class="ccvt-variation-cell ccvt-variation-price">
+                                <span class="ccvt-variation-price-value"><?php echo wp_kses_post( $data['price_html'] ); ?></span>
                             </td>
-                            <td class="ccvt-variation-quantity">
+                            <td class="ccvt-variation-cell ccvt-variation-quantity">
                                 <div class="ccvt-qty-control">
                                     <button type="button" class="ccvt-qty-button ccvt-qty-decrement" aria-label="<?php esc_attr_e( 'Decrease quantity', 'custom-color-variation-table' ); ?>" <?php echo $data['in_stock'] ? '' : 'disabled'; ?>>-</button>
                                     <input
