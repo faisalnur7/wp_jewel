@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Custom_Color_Variation_Table {
+    private $allowed_quantity_steps = array( 1, 6, 12, 18 );
+
     public function __construct() {
         add_action( 'plugins_loaded', array( $this, 'init' ), 20 );
     }
@@ -19,10 +21,74 @@ class Custom_Color_Variation_Table {
     public function init() {
         add_filter( 'woocommerce_locate_template', array( $this, 'locate_template' ), 10, 3 );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+        add_action( 'woocommerce_product_options_inventory_product_data', array( $this, 'render_quantity_step_field' ) );
+        add_action( 'woocommerce_admin_process_product_object', array( $this, 'save_quantity_step_field' ) );
         add_action( 'wp_ajax_ccvt_add_to_cart', array( $this, 'ajax_add_to_cart' ) );
         add_action( 'wp_ajax_nopriv_ccvt_add_to_cart', array( $this, 'ajax_add_to_cart' ) );
         add_filter( 'woocommerce_grouped_product_list_column_quantity', array( $this, 'render_grouped_child_quantity_column' ), 10, 2 );
         add_action( 'woocommerce_before_add_to_cart_form', array( $this, 'render_grouped_notices' ) );
+    }
+
+    private function normalize_quantity_step( $step ) {
+        $step = absint( $step );
+
+        if ( ! in_array( $step, $this->allowed_quantity_steps, true ) ) {
+            return 1;
+        }
+
+        return $step;
+    }
+
+    private function normalize_quantity_to_step( $quantity, $step ) {
+        $quantity = absint( $quantity );
+        $step     = $this->normalize_quantity_step( $step );
+
+        if ( 1 === $step ) {
+            return $quantity;
+        }
+
+        return (int) floor( $quantity / $step ) * $step;
+    }
+
+    private function get_quantity_step_for_product( $product ) {
+        if ( ! $product instanceof WC_Product ) {
+            return 1;
+        }
+
+        return $this->normalize_quantity_step( get_post_meta( $product->get_id(), '_ccvt_quantity_step', true ) );
+    }
+
+    public function render_quantity_step_field() {
+        global $product_object;
+
+        if ( ! $product_object instanceof WC_Product ) {
+            return;
+        }
+
+        $options = array();
+        foreach ( $this->allowed_quantity_steps as $step ) {
+            $options[ (string) $step ] = sprintf( __( '%d pcs', 'custom-color-variation-table' ), $step );
+        }
+
+        woocommerce_wp_select(
+            array(
+                'id'          => '_ccvt_quantity_step',
+                'label'       => __( 'Quantity step', 'custom-color-variation-table' ),
+                'description' => __( 'Controls how many pieces are added when using the +/- buttons in the quantity table.', 'custom-color-variation-table' ),
+                'desc_tip'    => true,
+                'options'     => $options,
+                'value'       => (string) $this->get_quantity_step_for_product( $product_object ),
+            )
+        );
+    }
+
+    public function save_quantity_step_field( $product ) {
+        if ( ! $product instanceof WC_Product || ! isset( $_POST['_ccvt_quantity_step'] ) ) {
+            return;
+        }
+
+        $quantity_step = $this->normalize_quantity_step( wp_unslash( $_POST['_ccvt_quantity_step'] ) );
+        $product->update_meta_data( '_ccvt_quantity_step', $quantity_step );
     }
 
     public function disable_variation_swatches_hooks() {
@@ -206,6 +272,8 @@ class Custom_Color_Variation_Table {
             return '<span class="ccvt-empty-variations">' . esc_html__( 'No variations available.', 'custom-color-variation-table' ) . '</span>';
         }
 
+        $quantity_step = $this->get_quantity_step_for_product( $product );
+
         ob_start();
         ?>
         <div class="ccvt-grouped-variation-table-wrapper">
@@ -266,8 +334,9 @@ class Custom_Color_Variation_Table {
                                         type="number"
                                         class="ccvt-variation-qty"
                                         min="0"
-                                        step="1"
+                                        step="<?php echo esc_attr( $quantity_step ); ?>"
                                         value="0"
+                                        data-step="<?php echo esc_attr( $quantity_step ); ?>"
                                         data-variation-id="<?php echo esc_attr( $variation_id ); ?>"
                                         data-max-qty="<?php echo esc_attr( $max_qty ); ?>"
                                         data-stock-qty="<?php echo esc_attr( $stock_qty ); ?>"
@@ -302,6 +371,8 @@ class Custom_Color_Variation_Table {
             wp_send_json_error( array( 'message' => __( 'Invalid product.', 'custom-color-variation-table' ) ) );
         }
 
+        $quantity_step = $this->get_quantity_step_for_product( $product );
+
         $added = 0;
         $messages = array();
 
@@ -320,6 +391,8 @@ class Custom_Color_Variation_Table {
                     $messages[] = sprintf( __( 'Product %s is unavailable.', 'custom-color-variation-table' ), $child ? $child->get_name() : $child_id );
                     continue;
                 }
+
+                $quantity = $this->normalize_quantity_to_step( $quantity, $quantity_step );
 
                 $cart_item_key = WC()->cart->add_to_cart( $child_id, $quantity );
                 if ( $cart_item_key ) {
@@ -351,6 +424,7 @@ class Custom_Color_Variation_Table {
                     continue;
                 }
 
+                $quantity = $this->normalize_quantity_to_step( $quantity, $quantity_step );
                 $max_purchase = $variation->get_max_purchase_quantity();
                 $available_stock = $variation->managing_stock() ? $variation->get_stock_quantity() : 0;
 

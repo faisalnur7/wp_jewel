@@ -15,6 +15,11 @@ $show_add_to_cart    = false;
 $items               = array();
 $total_min_price     = 0;
 $total_max_price     = 0;
+$quantity_step       = absint( get_post_meta( $product->get_id(), '_ccvt_quantity_step', true ) );
+
+if ( ! in_array( $quantity_step, array( 1, 6, 12, 18 ), true ) ) {
+	$quantity_step = 1;
+}
 
 foreach ( $grouped_products as $grouped_product_child ) {
 	$post_object         = get_post( $grouped_product_child->get_id() );
@@ -138,10 +143,10 @@ do_action( 'woocommerce_before_add_to_cart_form' );
 											class="ccvt-grouped-qty-input"
 											name="<?php echo esc_attr( 'quantity[' . $item['id'] . ']' ); ?>"
 											min="0"
-											step="1"
+											step="<?php echo esc_attr( $quantity_step ); ?>"
 											value="0"
 											placeholder="0"
-											data-step="1"
+											data-step="<?php echo esc_attr( $quantity_step ); ?>"
 											data-product-id="<?php echo esc_attr( $item['id'] ); ?>"
 											data-price="<?php echo esc_attr( wc_format_decimal( $item['price'], wc_get_price_decimals() ) ); ?>"
 											data-max-qty="<?php echo esc_attr( $item['max_qty'] ); ?>"

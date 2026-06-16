@@ -46,6 +46,11 @@ if ( ! $variation_attribute_name ) {
     return;
 }
 
+$quantity_step = absint( get_post_meta( $product->get_id(), '_ccvt_quantity_step', true ) );
+if ( ! in_array( $quantity_step, array( 1, 6, 12, 18 ), true ) ) {
+    $quantity_step = 1;
+}
+
 $variation_ids = array();
 if ( is_array( $available_variations ) && ! empty( $available_variations ) ) {
     foreach ( $available_variations as $variation_data ) {
@@ -155,9 +160,9 @@ foreach ( $variation_ids as $variation_id ) {
                                         type="number"
                                         class="ccvt-variation-qty"
                                         min="0"
-                                        step="1"
+                                        step="<?php echo esc_attr( $quantity_step ); ?>"
                                         value="0"
-                                        data-step="1"
+                                        data-step="<?php echo esc_attr( $quantity_step ); ?>"
                                         data-variation-id="<?php echo esc_attr( $data['id'] ); ?>"
                                         data-max-qty="<?php echo esc_attr( $data['max_qty'] ); ?>"
                                         data-stock-qty="<?php echo esc_attr( $data['stock_qty'] ); ?>"
