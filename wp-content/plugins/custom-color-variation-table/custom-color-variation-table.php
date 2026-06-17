@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Custom_Color_Variation_Table {
-    private $allowed_quantity_steps = array( 1, 6, 12, 18 );
+    private $allowed_quantity_steps = array( 1, 6 );
 
     public function __construct() {
         add_action( 'plugins_loaded', array( $this, 'init' ), 20 );
@@ -21,6 +21,9 @@ class Custom_Color_Variation_Table {
     public function init() {
         add_filter( 'woocommerce_locate_template', array( $this, 'locate_template' ), 10, 3 );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_cart_assets' ) );
+        add_filter( 'woocommerce_quantity_input_args', array( $this, 'filter_quantity_input_args' ), 10, 2 );
+        add_filter( 'woocommerce_cart_item_quantity', array( $this, 'render_cart_item_quantity' ), 10, 3 );
         add_action( 'woocommerce_product_options_inventory_product_data', array( $this, 'render_quantity_step_field' ) );
         add_action( 'woocommerce_admin_process_product_object', array( $this, 'save_quantity_step_field' ) );
         add_action( 'wp_ajax_ccvt_add_to_cart', array( $this, 'ajax_add_to_cart' ) );
@@ -55,7 +58,83 @@ class Custom_Color_Variation_Table {
             return 1;
         }
 
-        return $this->normalize_quantity_step( get_post_meta( $product->get_id(), '_ccvt_quantity_step', true ) );
+        $quantity_step = get_post_meta( $product->get_id(), '_ccvt_quantity_step', true );
+
+        if ( '' !== $quantity_step && null !== $quantity_step ) {
+            return $this->normalize_quantity_step( $quantity_step );
+        }
+
+        if ( $product->is_type( 'variation' ) ) {
+            $parent_id = $product->get_parent_id();
+            if ( $parent_id ) {
+                return $this->normalize_quantity_step( get_post_meta( $parent_id, '_ccvt_quantity_step', true ) );
+            }
+        }
+
+        return 1;
+    }
+
+    public function filter_quantity_input_args( $args, $product ) {
+        if ( ! $product instanceof WC_Product ) {
+            return $args;
+        }
+
+        $quantity_step = $this->get_quantity_step_for_product( $product );
+
+        if ( $quantity_step < 1 ) {
+            return $args;
+        }
+
+        $args['step'] = $quantity_step;
+
+        if ( ! isset( $args['min_value'] ) || $args['min_value'] < 0 ) {
+            $args['min_value'] = 0;
+        }
+
+        return $args;
+    }
+
+    public function render_cart_item_quantity( $product_quantity, $cart_item_key, $cart_item ) {
+        if ( ! is_cart() || empty( $cart_item['data'] ) || ! $cart_item['data'] instanceof WC_Product ) {
+            return $product_quantity;
+        }
+
+        $product = $cart_item['data'];
+
+        if ( $product->is_sold_individually() ) {
+            return $product_quantity;
+        }
+
+        $quantity_step = $this->get_quantity_step_for_product( $product );
+        $max_qty       = $product->get_max_purchase_quantity();
+        $min_qty       = 0;
+        $quantity      = absint( $cart_item['quantity'] );
+        $disabled      = ! $product->is_purchasable() || ! $product->is_in_stock();
+
+        ob_start();
+        ?>
+        <div class="ccvt-variation-quantity">
+            <div class="ccvt-qty-control ccvt-cart-qty-control">
+                <button type="button" class="ccvt-qty-button ccvt-qty-decrement" aria-label="<?php esc_attr_e( 'Decrease quantity', 'custom-color-variation-table' ); ?>" <?php echo $disabled ? 'disabled' : ''; ?>>-</button>
+                <input
+                    type="number"
+                    class="ccvt-variation-qty ccvt-cart-qty-input"
+                    name="<?php echo esc_attr( "cart[{$cart_item_key}][qty]" ); ?>"
+                    min="<?php echo esc_attr( $min_qty ); ?>"
+                    step="<?php echo esc_attr( $quantity_step ); ?>"
+                    value="<?php echo esc_attr( $quantity ); ?>"
+                    data-step="<?php echo esc_attr( $quantity_step ); ?>"
+                    data-cart-item-key="<?php echo esc_attr( $cart_item_key ); ?>"
+                    data-max-qty="<?php echo esc_attr( $max_qty ); ?>"
+                    <?php echo $disabled ? 'disabled' : ''; ?>
+                    aria-label="<?php echo esc_attr( sprintf( __( 'Quantity for %s', 'custom-color-variation-table' ), $product->get_name() ) ); ?>"
+                />
+                <button type="button" class="ccvt-qty-button ccvt-qty-increment" aria-label="<?php esc_attr_e( 'Increase quantity', 'custom-color-variation-table' ); ?>" <?php echo $disabled ? 'disabled' : ''; ?>>+</button>
+            </div>
+        </div>
+        <?php
+
+        return ob_get_clean();
     }
 
     public function render_quantity_step_field() {
@@ -198,6 +277,37 @@ class Custom_Color_Variation_Table {
                     'ajax_error'      => __( 'There was a problem adding items to the cart. Please try again.', 'custom-color-variation-table' ),
                 ),
             )
+        );
+    }
+
+    public function enqueue_cart_assets() {
+        if ( ! is_cart() ) {
+            return;
+        }
+
+        $style_path = plugin_dir_path( __FILE__ ) . 'assets/css/custom-color-variation-table.css';
+        $script_path = plugin_dir_path( __FILE__ ) . 'assets/js/custom-color-variation-table-cart.js';
+        $style_ver   = file_exists( $style_path ) ? filemtime( $style_path ) : '1.0.0';
+
+        if ( ! wp_style_is( 'ccvt-style', 'enqueued' ) ) {
+            wp_enqueue_style(
+                'ccvt-style',
+                plugin_dir_url( __FILE__ ) . 'assets/css/custom-color-variation-table.css',
+                array(),
+                $style_ver
+            );
+        }
+
+        if ( ! file_exists( $script_path ) ) {
+            return;
+        }
+
+        wp_enqueue_script(
+            'ccvt-cart-script',
+            plugin_dir_url( __FILE__ ) . 'assets/js/custom-color-variation-table-cart.js',
+            array( 'jquery' ),
+            filemtime( $script_path ),
+            true
         );
     }
 
