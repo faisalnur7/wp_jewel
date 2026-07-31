@@ -3,12 +3,44 @@
     color: #111827;
 }
 
-.ccvt-shell {
-    background: #ffffff;
-    border: 0;
-    border-radius: 0;
-    padding: 0;
-    box-shadow: none;
+.single-product .woocommerce div.product {
+    align-items: flex-start;
+}
+
+.single-product .woocommerce div.product .woocommerce-product-gallery,
+.single-product .woocommerce div.product .summary {
+    align-self: flex-start;
+}
+
+.single-product .woocommerce div.product .woocommerce-product-gallery {
+    margin-top: 0;
+    padding-top: 0;
+    display: block;
+}
+
+.single-product .woocommerce div.product .woocommerce-product-gallery .woocommerce-product-gallery__wrapper,
+.single-product .woocommerce div.product .woocommerce-product-gallery .woocommerce-product-gallery__image,
+.single-product .woocommerce div.product .woocommerce-product-gallery .woocommerce-product-gallery__image a {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.single-product .woocommerce div.product .woocommerce-product-gallery .woocommerce-product-gallery__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    align-self: flex-start;
+}
+
+.ccvt-hide-summary-title-price .single-product .product_title,
+.ccvt-hide-summary-title-price .single-product .summary > .price,
+.ccvt-hide-summary-title-price .single-product .summary .price {
+    display: none !important;
 }
 
 .ccvt-notices {
@@ -35,8 +67,14 @@
 }
 
 .ccvt-table-wrap {
+    max-height: 72vh;
     overflow-x: auto;
-    background: transparent;
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    scrollbar-gutter: stable;
+    overscroll-behavior: contain;
 }
 
 .ccvt-variation-table,
@@ -49,14 +87,18 @@
 
 .ccvt-variation-table thead th,
 .ccvt-grouped-table thead th {
-    background: #f3f4f6;
+    background: #f9fafb;
     color: #374151;
     font-size: 0.9rem;
     font-weight: 700;
     text-transform: none;
     letter-spacing: 0;
     border: 0;
-    padding: 8px;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 14px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 .ccvt-variation-table tbody td,
@@ -65,7 +107,7 @@
     border-top: 1px solid #d7dde5;
     border-bottom: 1px solid #d7dde5;
     vertical-align: middle;
-    padding: 8px;
+    padding: 12px 14px;
 }
 
 .ccvt-variation-row:hover td,
@@ -82,7 +124,7 @@
 .ccvt-variation-cell {
     color: #111827;
     background: none !important;
-    padding-left:8px !important;
+    padding-left: 12px !important;
     border: 0;
 }
 
@@ -90,6 +132,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    min-width: 0;
 }
 
 .ccvt-variation-image {
@@ -97,17 +140,30 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 56px;
+    min-width: 56px;
+    height: 56px;
+    padding: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    box-sizing: border-box;
 }
 
 .ccvt-variation-image img,
 .ccvt-variation-image svg {
     display: block;
-    width: 44px;
-    height: 44px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 4px !important;
-    border: 1px solid #e5e7eb;
+    border-radius: 0 !important;
+    border: 0;
     box-shadow: none;
+}
+
+.ccvt-variation-name {
+    min-width: 0;
 }
 
 .ccvt-variation-copy {
@@ -119,7 +175,7 @@
 
 .ccvt-variation-label {
     display: block;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 1rem;
     line-height: 1.35;
     color: #374151;
@@ -140,6 +196,7 @@
     border-left: 0 !important;
     border-right: 0 !important;
     background: transparent;
+    width: 18%;
 }
 
 .ccvt-variation-price-value,
@@ -156,6 +213,7 @@
 .ccvt-variation-quantity,
 .ccvt-grouped-quantity {
     min-width: 150px;
+    width: 22%;
 }
 
 .ccvt-qty-control {
@@ -252,7 +310,8 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    margin-top: 0.85rem;
+    margin-top: 1rem;
+    padding-top: 0.25rem;
     flex-wrap: wrap;
 }
 
@@ -288,10 +347,14 @@
 
 .ccvt-grouped-heading {
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
 }
 
 .ccvt-grouped-range {
-    font-size: 2rem;
+    font-size: 1.85rem;
     line-height: 1;
     font-weight: 700;
     color: #111827;
@@ -307,16 +370,25 @@
 .ccvt-grouped-product-image {
     flex: 0 0 auto;
     display: inline-flex;
+    width: 56px;
+    min-width: 56px;
+    height: 56px;
+    padding: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    box-sizing: border-box;
 }
 
 .ccvt-grouped-product-image img,
 .ccvt-grouped-product-image svg {
-    width: 44px;
-    height: 44px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 0;
     display: block;
-    border: 1px solid #e5e7eb;
+    border: 0;
     box-shadow: none;
 }
 
@@ -527,10 +599,6 @@
 }
 
 @media screen and (max-width: 720px) {
-    .ccvt-shell {
-        padding: 4px;
-    }
-
     .ccvt-variation-table,
     .ccvt-grouped-table {
         border-spacing: 0 4px;
@@ -540,6 +608,8 @@
     .ccvt-table-wrap {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        max-height: 58vh;
+        border-radius: 12px;
     }
 
     .ccvt-variation-table thead th,
@@ -562,8 +632,8 @@
     .ccvt-variation-image svg,
     .ccvt-grouped-product-image img,
     .ccvt-grouped-product-image svg {
-        width: 40px;
-        height: 40px;
+        width: 100%;
+        height: 100%;
     }
 
     .ccvt-variation-label,

@@ -3,7 +3,7 @@
  * Plugin Name: Custom Color Variation Table
  * Description: Replaces WooCommerce variable product color dropdown with a bulk quantity table on the product page.
  * Version: 1.0.0
- * Author: Custom WooCommerce Implementation
+ * Author: Faisal Nur
  * Text Domain: custom-color-variation-table
  */
 
@@ -20,8 +20,10 @@ class Custom_Color_Variation_Table {
 
     public function init() {
         add_filter( 'woocommerce_locate_template', array( $this, 'locate_template' ), 10, 3 );
+        add_filter( 'body_class', array( $this, 'add_body_class' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_cart_assets' ) );
+        add_action( 'wp', array( $this, 'maybe_remove_single_product_summary_parts' ) );
         add_filter( 'woocommerce_quantity_input_args', array( $this, 'filter_quantity_input_args' ), 10, 2 );
         add_filter( 'woocommerce_cart_item_quantity', array( $this, 'render_cart_item_quantity' ), 10, 3 );
         add_action( 'woocommerce_product_options_inventory_product_data', array( $this, 'render_quantity_step_field' ) );
@@ -207,6 +209,37 @@ class Custom_Color_Variation_Table {
         }
 
         return $template;
+    }
+
+    public function maybe_remove_single_product_summary_parts() {
+        if ( ! is_product() ) {
+            return;
+        }
+
+        $product_id = get_queried_object_id();
+        $product    = $product_id ? wc_get_product( $product_id ) : null;
+
+        if ( ! $product instanceof WC_Product_Variable ) {
+            return;
+        }
+
+        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+    }
+
+    public function add_body_class( $classes ) {
+        if ( ! is_product() ) {
+            return $classes;
+        }
+
+        $product_id = get_queried_object_id();
+        $product    = $product_id ? wc_get_product( $product_id ) : null;
+
+        if ( $product instanceof WC_Product_Variable ) {
+            $classes[] = 'ccvt-hide-summary-title-price';
+        }
+
+        return $classes;
     }
 
     public function enqueue_assets() {
