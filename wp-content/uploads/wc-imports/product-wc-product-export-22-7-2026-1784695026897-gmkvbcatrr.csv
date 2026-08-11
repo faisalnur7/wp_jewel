@@ -1,0 +1,60 @@
+﻿ID,Type,Name,Attribute 1 name,Attribute 1 value(s),Attribute 1 visible,Attribute 1 global
+264,variable,Bohemian style colorful bracelet,Color,"BR-EN-001, BR-EN-002, BR-EN-003, BR-EN-004, BR-EN-005, BR-EN-006, BR-EN-007, BR-EN-008, BR-EN-009, BR-EN-010, BR-EN-011, BR-EN-012, BR-EN-013, BR-EN-014, BR-EN-015, BR-EN-016, BR-EN-017, BR-EN-018, BR-EN-019, BR-EN-020, BR-EN-021, BR-EN-022, BR-EN-023, BR-EN-024, BR-EN-025, BR-EN-026, BR-EN-027, BR-EN-028, BR-EN-029, BR-EN-030, BR-EN-031, BR-EN-032, BR-EN-033, BR-EN-034, BR-EN-035, BR-EN-036, BR-EN-037, BR-EN-038, BR-EN-039, BR-EN-040, BR-EN-041, BR-EN-042, BR-EN-043, BR-EN-044, BR-EN-045, BR-EN-046, BR-EN-047, BR-EN-048, BR-EN-049, BR-EN-050, BR-EN-051, BR-EN-052, BR-EN-053, BR-EN-054, BR-EN-055, BR-EN-056, BR-EN-057, BR-EN-058, BR-EN-059, BR-EN-060, BR-EN-061, BR-EN-062, BR-EN-063, BR-EN-064, BR-EN-065, BR-EN-066, BR-EN-067, BR-EN-068, BR-EN-069, BR-EN-070, BR-EN-071, BR-EN-072, BR-EN-073, BR-EN-074, BR-EN-075, BR-EN-076, BR-EN-077, BR-EN-078, BR-EN-079, BR-EN-080, BR-EN-081, BR-EN-082, BR-EN-083, BR-EN-084, BR-EN-085, BR-EN-086, BR-EN-087, BR-EN-088, BR-EN-089, BR-EN-090, BR-EN-091, BR-EN-092, BR-EN-093, BR-EN-094, BR-EN-095, BR-EN-096, BR-EN-097, BR-EN-098, BR-EN-099, BR-EN-100, BR-EN-101, BR-EN-102, BR-EN-103, BR-EN-104, BR-EN-105, BR-EN-106, BR-EN-107, BR-EN-108, BR-EN-109, BR-EN-110, BR-EN-111, BR-EN-112, BR-EN-113, BR-EN-114, BR-EN-115, BR-EN-116, BR-EN-117, BR-EN-118, BR-EN-119, BR-EN-120",1,1
+422,variable,Test Product,Color,"Blue, Gold, Gray, Red, Rose Gold, Silver",1,1
+488,variable,Faisal Product,Color,"RN-EN-001, RN-EN-002, RN-EN-003, RN-EN-004, RN-EN-005, RN-EN-006, RN-EN-007, RN-EN-008, RN-EN-009, RN-EN-010, RN-EN-011, RN-EN-012, RN-EN-013, RN-EN-014, RN-EN-015, RN-EN-016, RN-EN-017, RN-EN-018, RN-EN-019, RN-EN-020, RN-EN-021, RN-EN-022, RN-EN-023, RN-EN-024, RN-EN-025, RN-EN-026, RN-EN-027, RN-EN-028, RN-EN-029, RN-EN-030, RN-EN-031, RN-EN-032, RN-EN-033, RN-EN-034, RN-EN-035, RN-EN-036, RN-EN-037, RN-EN-038, RN-EN-039, RN-EN-040, RN-EN-041, RN-EN-042, RN-EN-043, RN-EN-044, RN-EN-045, RN-EN-046, RN-EN-047, RN-EN-048, RN-EN-049, RN-EN-050, RN-EN-051, RN-EN-052, RN-EN-053, RN-EN-054, RN-EN-055, RN-EN-056, RN-EN-057, RN-EN-058, RN-EN-059, RN-EN-060, RN-EN-061, RN-EN-062, RN-EN-063, RN-EN-064, RN-EN-065, RN-EN-066, RN-EN-067, RN-EN-068, RN-EN-069, RN-EN-070, RN-EN-071, RN-EN-072, RN-EN-073, RN-EN-074, RN-EN-075, RN-EN-076, RN-EN-077, RN-EN-078, RN-EN-079, RN-EN-080, RN-EN-081, RN-EN-082, RN-EN-083, RN-EN-084, RN-EN-085, RN-EN-086, RN-EN-087, RN-EN-088, RN-EN-089, RN-EN-090, RN-EN-091, RN-EN-092, RN-EN-093, RN-EN-094, RN-EN-095, RN-EN-096, RN-EN-097, RN-EN-098, RN-EN-099, RN-EN-100, RN-EN-101, RN-EN-102, RN-EN-103, RN-EN-104, RN-EN-105, RN-EN-106, RN-EN-107, RN-EN-108, RN-EN-109, RN-EN-110, RN-EN-111, RN-EN-112, RN-EN-113, RN-EN-114, RN-EN-115, RN-EN-116, RN-EN-117, RN-EN-118, RN-EN-119, RN-EN-120",1,1
+487,variation,Bohemian style colorful bracelet - BR-EN-050,Color,BR-EN-050,,1
+486,variation,Bohemian style colorful bracelet - BR-EN-049,Color,BR-EN-049,,1
+485,variation,Bohemian style colorful bracelet - BR-EN-048,Color,BR-EN-048,,1
+484,variation,Bohemian style colorful bracelet - BR-EN-047,Color,BR-EN-047,,1
+483,variation,Bohemian style colorful bracelet - BR-EN-046,Color,BR-EN-046,,1
+482,variation,Bohemian style colorful bracelet - BR-EN-045,Color,BR-EN-045,,1
+481,variation,Bohemian style colorful bracelet - BR-EN-044,Color,BR-EN-044,,1
+480,variation,Bohemian style colorful bracelet - BR-EN-043,Color,BR-EN-043,,1
+479,variation,Bohemian style colorful bracelet - BR-EN-042,Color,BR-EN-042,,1
+478,variation,Bohemian style colorful bracelet - BR-EN-041,Color,BR-EN-041,,1
+476,variation,Bohemian style colorful bracelet - BR-EN-039,Color,BR-EN-039,,1
+473,variation,Bohemian style colorful bracelet - BR-EN-036,Color,BR-EN-036,,1
+474,variation,Bohemian style colorful bracelet - BR-EN-037,Color,BR-EN-037,,1
+475,variation,Bohemian style colorful bracelet - BR-EN-038,Color,BR-EN-038,,1
+477,variation,Bohemian style colorful bracelet - BR-EN-040,Color,BR-EN-040,,1
+472,variation,Bohemian style colorful bracelet - BR-EN-035,Color,BR-EN-035,,1
+471,variation,Bohemian style colorful bracelet - BR-EN-034,Color,BR-EN-034,,1
+470,variation,Bohemian style colorful bracelet - BR-EN-033,Color,BR-EN-033,,1
+469,variation,Bohemian style colorful bracelet - BR-EN-032,Color,BR-EN-032,,1
+468,variation,Bohemian style colorful bracelet - BR-EN-031,Color,BR-EN-031,,1
+463,variation,Bohemian style colorful bracelet - BR-EN-026,Color,BR-EN-026,,1
+467,variation,Bohemian style colorful bracelet - BR-EN-030,Color,BR-EN-030,,1
+466,variation,Bohemian style colorful bracelet - BR-EN-029,Color,BR-EN-029,,1
+465,variation,Bohemian style colorful bracelet - BR-EN-028,Color,BR-EN-028,,1
+464,variation,Bohemian style colorful bracelet - BR-EN-027,Color,BR-EN-027,,1
+462,variation,Bohemian style colorful bracelet - BR-EN-025,Color,BR-EN-025,,1
+461,variation,Bohemian style colorful bracelet - BR-EN-024,Color,BR-EN-024,,1
+460,variation,Bohemian style colorful bracelet - BR-EN-023,Color,BR-EN-023,,1
+459,variation,Bohemian style colorful bracelet - BR-EN-022,Color,BR-EN-022,,1
+458,variation,Bohemian style colorful bracelet - BR-EN-021,Color,BR-EN-021,,1
+457,variation,Bohemian style colorful bracelet - BR-EN-020,Color,BR-EN-020,,1
+456,variation,Bohemian style colorful bracelet - BR-EN-019,Color,BR-EN-019,,1
+455,variation,Bohemian style colorful bracelet - BR-EN-018,Color,BR-EN-018,,1
+454,variation,Bohemian style colorful bracelet - BR-EN-017,Color,BR-EN-017,,1
+451,variation,Bohemian style colorful bracelet - BR-EN-014,Color,BR-EN-014,,1
+449,variation,Bohemian style colorful bracelet - BR-EN-012,Color,BR-EN-012,,1
+450,variation,Bohemian style colorful bracelet - BR-EN-013,Color,BR-EN-013,,1
+452,variation,Bohemian style colorful bracelet - BR-EN-015,Color,BR-EN-015,,1
+453,variation,Bohemian style colorful bracelet - BR-EN-016,Color,BR-EN-016,,1
+448,variation,Bohemian style colorful bracelet - BR-EN-011,Color,BR-EN-011,,1
+447,variation,Bohemian style colorful bracelet - BR-EN-010,Color,BR-EN-010,,1
+446,variation,Bohemian style colorful bracelet - BR-EN-009,Color,BR-EN-009,,1
+445,variation,Bohemian style colorful bracelet - BR-EN-008,Color,BR-EN-008,,1
+444,variation,Bohemian style colorful bracelet - BR-EN-007,Color,BR-EN-007,,1
+443,variation,Bohemian style colorful bracelet - BR-EN-006,Color,BR-EN-006,,1
+442,variation,Bohemian style colorful bracelet - BR-EN-005,Color,BR-EN-005,,1
+441,variation,Bohemian style colorful bracelet - BR-EN-004,Color,BR-EN-004,,1
+440,variation,Bohemian style colorful bracelet - BR-EN-003,Color,BR-EN-003,,1
+439,variation,Bohemian style colorful bracelet - BR-EN-002,Color,BR-EN-002,,1
+438,variation,Bohemian style colorful bracelet - BR-EN-001,Color,BR-EN-001,,1
+425,variation,Test Product - Gray,Color,Gray,,1
+426,variation,Test Product - Red,Color,Red,,1
+427,variation,Test Product - Rose Gold,Color,Rose Gold,,1
+428,variation,Test Product - Silver,Color,Silver,,1
+423,variation,Test Product - Blue,Color,Blue,,1
+424,variation,Test Product - Gold,Color,Gold,,1

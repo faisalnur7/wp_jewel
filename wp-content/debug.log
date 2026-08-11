@@ -1,0 +1,355 @@
+[30-Jul-2026 06:06:46 UTC] PHP Fatal error:  Uncaught TypeError: BVCG_Generator::create_variation(): Argument #3 ($term) must be of type array, WP_Term given, called in /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php on line 176 and defined in /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php:604
+Stack trace:
+#0 /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php(176): BVCG_Generator->create_variation(Object(WC_Product_Variable), 'pa_color', Object(WP_Term), Array)
+#1 /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-ajax.php(100): BVCG_Generator->process_job('4f5f19ea-08c0-4...', 32)
+#2 /var/www/html/wp-includes/class-wp-hook.php(341): BVCG_Ajax->process_job('')
+#3 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters('', Array)
+#4 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#5 /var/www/html/wp-admin/admin-ajax.php(192): do_action('wp_ajax_bvcg_pr...')
+#6 {main}
+  thrown in /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php on line 604
+[30-Jul-2026 06:06:53 UTC] PHP Fatal error:  Uncaught TypeError: BVCG_Generator::create_variation(): Argument #3 ($term) must be of type array, WP_Term given, called in /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php on line 176 and defined in /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php:604
+Stack trace:
+#0 /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php(176): BVCG_Generator->create_variation(Object(WC_Product_Variable), 'pa_color', Object(WP_Term), Array)
+#1 /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-ajax.php(100): BVCG_Generator->process_job('b27b71df-71a4-4...', 32)
+#2 /var/www/html/wp-includes/class-wp-hook.php(341): BVCG_Ajax->process_job('')
+#3 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters('', Array)
+#4 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#5 /var/www/html/wp-admin/admin-ajax.php(192): do_action('wp_ajax_bvcg_pr...')
+#6 {main}
+  thrown in /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php on line 604
+[30-Jul-2026 06:07:32 UTC] PHP Fatal error:  Uncaught TypeError: BVCG_Generator::create_variation(): Argument #3 ($term) must be of type array, WP_Term given, called in /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php on line 176 and defined in /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php:604
+Stack trace:
+#0 /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php(176): BVCG_Generator->create_variation(Object(WC_Product_Variable), 'pa_color', Object(WP_Term), Array)
+#1 /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-ajax.php(100): BVCG_Generator->process_job('142f364f-1f7f-4...', 32)
+#2 /var/www/html/wp-includes/class-wp-hook.php(341): BVCG_Ajax->process_job('')
+#3 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters('', Array)
+#4 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#5 /var/www/html/wp-admin/admin-ajax.php(192): do_action('wp_ajax_bvcg_pr...')
+#6 {main}
+  thrown in /var/www/html/wp-content/plugins/bulk-variation-code-generator/includes/class-bvcg-generator.php on line 604
+[30-Jul-2026 21:08:19 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:19 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:19 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:20 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:20 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:20 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:22 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:22 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:22 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:22 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:22 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:22 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:22 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:23 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:23 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:23 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:23 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:23 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[30-Jul-2026 21:08:23 UTC] PHP Fatal error:  Uncaught WpOrg\Requests\Exception\Http\Status403: 403 Forbidden in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php:190
+Stack trace:
+#0 /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php(55): Elementor\Modules\CloudLibrary\Module->is_screenshot_proxy_mode(Array)
+#1 /var/www/html/wp-content/plugins/elementor/core/base/module.php(86): Elementor\Modules\CloudLibrary\Module->__construct()
+#2 /var/www/html/wp-content/plugins/elementor/core/modules-manager.php(64): Elementor\Core\Base\Module::instance()
+#3 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(712): Elementor\Core\Modules_Manager->__construct()
+#4 /var/www/html/wp-content/plugins/elementor/includes/plugin.php(630): Elementor\Plugin->init_components()
+#5 /var/www/html/wp-includes/class-wp-hook.php(341): Elementor\Plugin->init('')
+#6 /var/www/html/wp-includes/class-wp-hook.php(365): WP_Hook->apply_filters(NULL, Array)
+#7 /var/www/html/wp-includes/plugin.php(522): WP_Hook->do_action(Array)
+#8 /var/www/html/wp-settings.php(771): do_action('init')
+#9 /var/www/html/wp-config.php(142): require_once('/var/www/html/w...')
+#10 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')
+#11 /var/www/html/wp-blog-header.php(13): require_once('/var/www/html/w...')
+#12 /var/www/html/index.php(17): require('/var/www/html/w...')
+#13 {main}
+  thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
+[11-Aug-2026 19:00:04 UTC] PHP Warning:  mysqli_real_connect(): php_network_getaddresses: getaddrinfo for mysql failed: System error in /home/faisal/Sites/yao/wordpress/wp-includes/class-wpdb.php on line 1988
+[11-Aug-2026 19:00:04 UTC] PHP Warning:  mysqli_real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo for mysql failed: System error in /home/faisal/Sites/yao/wordpress/wp-includes/class-wpdb.php on line 1988

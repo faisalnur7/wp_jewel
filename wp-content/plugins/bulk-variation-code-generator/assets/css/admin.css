@@ -1,0 +1,143 @@
+.bvcg-panel {
+	padding: 16px 20px 20px;
+}
+
+.bvcg-notice {
+	margin: 0 0 16px;
+	padding: 12px 14px;
+	border-left: 4px solid #2271b1;
+	background: #f0f6fc;
+}
+
+.bvcg-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px 20px;
+}
+
+.bvcg-field {
+	margin: 0 0 8px;
+}
+
+.bvcg-field label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 6px;
+}
+
+.bvcg-field input[type="text"],
+.bvcg-field input[type="number"],
+.bvcg-field select,
+.bvcg-field textarea {
+	width: 100%;
+	max-width: 100%;
+}
+
+.bvcg-import {
+	margin-top: 8px;
+}
+
+.bvcg-image-import {
+	margin-top: 12px;
+	padding: 14px 16px;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	background: #fafafa;
+}
+
+.bvcg-seo-template {
+	margin: 14px 0;
+	padding: 14px 16px;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	background: #fff;
+}
+
+.bvcg-seo-template h3 {
+	margin: 0 0 8px;
+}
+
+.bvcg-seo-template .description {
+	display: block;
+	margin-bottom: 12px;
+}
+
+.bvcg-seo-template .bvcg-grid {
+	grid-template-columns: 1fr;
+	gap: 12px;
+}
+
+.bvcg-seo-template .bvcg-field input[type="text"] {
+	min-width: 100%;
+}
+
+.bvcg-hidden-textarea {
+	display: none !important;
+}
+
+.bvcg-image-preview {
+	padding: 12px 14px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+}
+
+.bvcg-image-summary {
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+
+.bvcg-image-list {
+	margin: 0;
+	padding-left: 18px;
+	max-height: 180px;
+	overflow: auto;
+}
+
+.bvcg-preview-wrap {
+	margin-top: 20px;
+	padding: 16px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+}
+
+.bvcg-preview {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.bvcg-preview-group ul {
+	margin: 8px 0 0;
+	padding-left: 18px;
+}
+
+.bvcg-preview-total {
+	grid-column: 1 / -1;
+	padding-top: 8px;
+	border-top: 1px solid #ececec;
+}
+
+.bvcg-actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 18px;
+}
+
+.bvcg-status {
+	font-weight: 600;
+}
+
+.bvcg-status.is-error,
+.bvcg-error {
+	color: #b32d2e;
+}
+
+@media (max-width: 960px) {
+	.bvcg-grid,
+	.bvcg-preview {
+		grid-template-columns: 1fr;
+	}
+}

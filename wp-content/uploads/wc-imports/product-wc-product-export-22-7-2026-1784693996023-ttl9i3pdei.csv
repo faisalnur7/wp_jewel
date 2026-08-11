@@ -1,0 +1,12 @@
+﻿ID,Type,Name,Attribute 1 name,Attribute 1 value(s),Attribute 1 visible,Attribute 1 global
+264,variable,Bohemian style colorful bracelet,Color,"BR-EN-001, BR-EN-002, BR-EN-003, BR-EN-004, BR-EN-005, BR-EN-006, BR-EN-007, BR-EN-008, BR-EN-009, BR-EN-010, BR-EN-011, BR-EN-012, BR-EN-013, BR-EN-014, BR-EN-015, BR-EN-016, BR-EN-017, BR-EN-018, BR-EN-019, BR-EN-020, BR-EN-021, BR-EN-022, BR-EN-023, BR-EN-024, BR-EN-025, BR-EN-026, BR-EN-027, BR-EN-028, BR-EN-029, BR-EN-030, BR-EN-031, BR-EN-032, BR-EN-033, BR-EN-034, BR-EN-035, BR-EN-036, BR-EN-037, BR-EN-038, BR-EN-039, BR-EN-040, BR-EN-041, BR-EN-042, BR-EN-043, BR-EN-044, BR-EN-045, BR-EN-046, BR-EN-047, BR-EN-048, BR-EN-049, BR-EN-050, BR-EN-051, BR-EN-052, BR-EN-053, BR-EN-054, BR-EN-055, BR-EN-056, BR-EN-057, BR-EN-058, BR-EN-059, BR-EN-060, BR-EN-061, BR-EN-062, BR-EN-063, BR-EN-064, BR-EN-065, BR-EN-066, BR-EN-067, BR-EN-068, BR-EN-069, BR-EN-070, BR-EN-071, BR-EN-072, BR-EN-073, BR-EN-074, BR-EN-075, BR-EN-076, BR-EN-077, BR-EN-078, BR-EN-079, BR-EN-080, BR-EN-081, BR-EN-082, BR-EN-083, BR-EN-084, BR-EN-085, BR-EN-086, BR-EN-087, BR-EN-088, BR-EN-089, BR-EN-090, BR-EN-091, BR-EN-092, BR-EN-093, BR-EN-094, BR-EN-095, BR-EN-096, BR-EN-097, BR-EN-098, BR-EN-099, BR-EN-100, BR-EN-101, BR-EN-102, BR-EN-103, BR-EN-104, BR-EN-105, BR-EN-106, BR-EN-107, BR-EN-108, BR-EN-109, BR-EN-110, BR-EN-111, BR-EN-112, BR-EN-113, BR-EN-114, BR-EN-115, BR-EN-116, BR-EN-117, BR-EN-118, BR-EN-119, BR-EN-120",1,1
+422,variable,Test Product,Color,"Blue, Gold, Gray, Red, Rose Gold, Silver",1,1
+360,variation,Bohemian style colorful bracelet - Gold,Color,Gold,,1
+359,variation,Bohemian style colorful bracelet - Rose Gold,Color,Rose Gold,,1
+357,variation,Bohemian style colorful bracelet - Silver,Color,Silver,,1
+425,variation,Test Product - Gray,Color,Gray,,1
+426,variation,Test Product - Red,Color,Red,,1
+427,variation,Test Product - Rose Gold,Color,Rose Gold,,1
+428,variation,Test Product - Silver,Color,Silver,,1
+423,variation,Test Product - Blue,Color,Blue,,1
+424,variation,Test Product - Gold,Color,Gold,,1
