@@ -1,4 +1,12 @@
 
+# Keep PHP upload limits in sync with the Docker PHP config so imports work
+# without requiring a manual container restart.
+<IfModule mod_php.c>
+php_value upload_max_filesize 20G
+php_value post_max_size 21G
+php_value memory_limit 10G
+</IfModule>
+
 # BEGIN WordPress
 # The directives (lines) between "BEGIN WordPress" and "END WordPress" are
 # dynamically generated, and should only be modified via WordPress filters.

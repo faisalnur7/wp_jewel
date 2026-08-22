@@ -24,6 +24,7 @@ class Custom_Color_Variation_Table {
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_cart_assets' ) );
         add_action( 'wp', array( $this, 'maybe_remove_single_product_summary_parts' ) );
+        add_action( 'ccvt_render_related_product_carousels', array( $this, 'render_related_product_carousels' ) );
         add_filter( 'woocommerce_quantity_input_args', array( $this, 'filter_quantity_input_args' ), 10, 2 );
         add_filter( 'woocommerce_cart_item_quantity', array( $this, 'render_cart_item_quantity' ), 10, 3 );
         add_action( 'woocommerce_product_options_inventory_product_data', array( $this, 'render_quantity_step_field' ) );
@@ -200,7 +201,7 @@ class Custom_Color_Variation_Table {
     }
 
     public function locate_template( $template, $template_name, $template_path ) {
-        if ( in_array( $template_name, array( 'single-product/add-to-cart/variable.php', 'single-product/add-to-cart/grouped.php' ), true ) ) {
+        if ( in_array( $template_name, array( 'single-product/add-to-cart/variable.php', 'single-product/add-to-cart/grouped.php', 'single-product/related.php' ), true ) ) {
             $plugin_template = plugin_dir_path( __FILE__ ) . 'templates/' . $template_name;
 
             if ( file_exists( $plugin_template ) ) {
@@ -225,6 +226,7 @@ class Custom_Color_Variation_Table {
 
         remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
         remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+        remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
     }
 
     public function add_body_class( $classes ) {
@@ -237,9 +239,127 @@ class Custom_Color_Variation_Table {
 
         if ( $product instanceof WC_Product_Variable ) {
             $classes[] = 'ccvt-hide-summary-title-price';
+            $classes[] = 'ccvt-gallery-sync';
         }
 
         return $classes;
+    }
+
+    private function get_variable_product_ids( $exclude_ids = array(), $category_ids = array(), $category_operator = 'IN', $limit = 8 ) {
+        $exclude_ids = array_values( array_unique( array_filter( array_map( 'absint', (array) $exclude_ids ) ) ) );
+        $category_ids = array_values( array_unique( array_filter( array_map( 'absint', (array) $category_ids ) ) ) );
+
+        $tax_query = array(
+            array(
+                'taxonomy' => 'product_type',
+                'field'    => 'slug',
+                'terms'    => array( 'variable' ),
+            ),
+        );
+
+        if ( ! empty( $category_ids ) ) {
+            $tax_query[] = array(
+                'taxonomy' => 'product_cat',
+                'field'    => 'term_id',
+                'terms'    => $category_ids,
+                'operator' => $category_operator,
+            );
+        }
+
+        $query = new WP_Query(
+            array(
+                'post_type'           => 'product',
+                'post_status'         => 'publish',
+                'posts_per_page'      => absint( $limit ),
+                'fields'              => 'ids',
+                'no_found_rows'       => true,
+                'ignore_sticky_posts' => true,
+                'orderby'             => array(
+                    'menu_order' => 'ASC',
+                    'title'      => 'ASC',
+                ),
+                'post__not_in'        => $exclude_ids,
+                'tax_query'           => $tax_query,
+            )
+        );
+
+        if ( empty( $query->posts ) || ! is_array( $query->posts ) ) {
+            return array();
+        }
+
+        $product_ids = array();
+
+        foreach ( $query->posts as $post_id ) {
+            $product = wc_get_product( absint( $post_id ) );
+
+            if ( $product instanceof WC_Product_Variable ) {
+                $product_ids[] = absint( $post_id );
+            }
+        }
+
+        return $product_ids;
+    }
+
+    private function render_related_product_card( $product_id ) {
+        $product = wc_get_product( $product_id );
+
+        if ( ! $product instanceof WC_Product ) {
+            return;
+        }
+
+        $price_html = $product->get_price_html();
+        $image_html  = $product->get_image( 'woocommerce_thumbnail' );
+
+        if ( ! $image_html ) {
+            $image_html = wc_placeholder_img( 'woocommerce_thumbnail' );
+        }
+        ?>
+        <a class="ccvt-related-card" href="<?php echo esc_url( get_permalink( $product_id ) ); ?>">
+            <span class="ccvt-related-card-image"><?php echo wp_kses_post( $image_html ); ?></span>
+            <span class="ccvt-related-card-copy">
+                <span class="ccvt-related-card-title"><?php echo esc_html( $product->get_name() ); ?></span>
+                <?php if ( $price_html ) : ?>
+                    <span class="ccvt-related-card-price"><?php echo wp_kses_post( $price_html ); ?></span>
+                <?php endif; ?>
+            </span>
+        </a>
+        <?php
+    }
+
+    private function render_related_product_section( $heading, $product_ids, $section_class ) {
+        if ( empty( $product_ids ) ) {
+            return;
+        }
+        ?>
+        <section class="ccvt-related-products <?php echo esc_attr( $section_class ); ?>">
+            <div class="ccvt-related-products-head">
+                <h2 class="ccvt-related-products-title"><?php echo esc_html( $heading ); ?></h2>
+            </div>
+            <div class="ccvt-related-products-track" aria-label="<?php echo esc_attr( $heading ); ?>">
+                <?php foreach ( $product_ids as $product_id ) : ?>
+                    <?php $this->render_related_product_card( $product_id ); ?>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <?php
+    }
+
+    public function render_related_product_carousels() {
+        if ( ! is_product() ) {
+            return;
+        }
+
+        $current_id = get_queried_object_id();
+        $product    = $current_id ? wc_get_product( $current_id ) : null;
+
+        if ( ! $product instanceof WC_Product ) {
+            return;
+        }
+
+        $category_ids = wp_get_post_terms( $current_id, 'product_cat', array( 'fields' => 'ids' ) );
+        $category_related_ids = $this->get_variable_product_ids( array( $current_id ), $category_ids, 'IN', 8 );
+
+        $this->render_related_product_section( __( 'Related products', 'custom-color-variation-table' ), $category_related_ids, 'ccvt-related-products-category' );
     }
 
     public function enqueue_assets() {

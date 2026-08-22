@@ -137,7 +137,7 @@ foreach ( $variation_ids as $variation_id ) {
         <table class="ccvt-variation-table" cellspacing="0" role="presentation">
             <thead>
                 <tr>
-                    <th class="color-th"><?php esc_html_e( 'Color', 'custom-color-variation-table' ); ?></th>
+                    <th class="color-th text-left"><?php esc_html_e( 'Color', 'custom-color-variation-table' ); ?></th>
                     <th class="price-th"><?php esc_html_e( 'Price', 'custom-color-variation-table' ); ?></th>
                     <th class="quantity-th"><?php esc_html_e( 'Quantity', 'custom-color-variation-table' ); ?></th>
                 </tr>
@@ -170,6 +170,7 @@ foreach ( $variation_ids as $variation_id ) {
                                     value="0"
                                     data-step="<?php echo esc_attr( $quantity_step ); ?>"
                                     data-variation-id="<?php echo esc_attr( $data['id'] ); ?>"
+                                    data-price="<?php echo esc_attr( wc_format_decimal( wc_get_price_to_display( $data['variation'] ), wc_get_price_decimals() ) ); ?>"
                                     data-max-qty="<?php echo esc_attr( $data['max_qty'] ); ?>"
                                     data-stock-qty="<?php echo esc_attr( $data['stock_qty'] ); ?>"
                                     <?php echo $data['in_stock'] ? '' : 'disabled'; ?>
@@ -190,15 +191,15 @@ foreach ( $variation_ids as $variation_id ) {
             <strong class="ccvt-total-items">0</strong>
         </div>
         <button type="submit" class="single_add_to_cart_button button alt ccvt-add-to-cart" disabled>
-            <?php esc_html_e( 'Add to cart', 'custom-color-variation-table' ); ?>
-            <span class="ccvt-button-count">(0)</span>
+            <span class="ccvt-button-label"><?php esc_html_e( 'Add to cart', 'custom-color-variation-table' ); ?></span>
+            <span class="ccvt-button-count">(0 items - <?php echo wp_kses_post( wc_price( 0 ) ); ?>)</span>
         </button>
     </div>
 
     <?php wp_nonce_field( 'ccvt_add_to_cart', 'ccvt_add_to_cart_nonce' ); ?>
     <input type="hidden" name="product_id" value="<?php echo absint( $product->get_id() ); ?>" />
 
-    <?php do_action( 'woocommerce_after_variations_form' ); ?>
+<?php do_action( 'woocommerce_after_variations_form' ); ?>
 </form>
 
 <?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>

@@ -17,6 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	const DEFAULT_BATCH_SIZE = 32;
 
 	/**
+	 * Maximum allowed image upload size.
+	 */
+	const MAX_IMAGE_UPLOAD_SIZE = 10737418240;
+
+	/**
 	 * Creates a generation job from posted data.
 	 *
 	 * @param array $payload Raw payload.
@@ -137,7 +142,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$image_map           = isset( $job['image_map'] ) && is_array( $job['image_map'] ) ? $job['image_map'] : array();
 		$seo_template        = isset( $job['seo_template'] ) && is_array( $job['seo_template'] ) ? $job['seo_template'] : array();
 
-		foreach ( $batch_items as $item ) {
+			foreach ( $batch_items as $item ) {
 			$code = isset( $item['code'] ) ? (string) $item['code'] : '';
 			$attachment_id = $this->get_image_attachment_id_for_code( $code, $image_map );
 			$variation_id  = isset( $existing_variations[ $code ] ) ? absint( $existing_variations[ $code ] ) : 0;
@@ -196,10 +201,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			} elseif ( ! empty( $image_map ) ) {
 				$images_missing++;
 			}
-			$created++;
-		}
+				$created++;
+			}
 
-		$processed += count( $batch_items );
+			WC_Product_Variable::sync_stock_status( $product );
+
+			$processed += count( $batch_items );
 
 		if ( $processed >= $total ) {
 			delete_transient( $key );
@@ -597,11 +604,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 *
 	 * @param WC_Product $product Parent product.
 	 * @param string     $taxonomy Taxonomy.
-	 * @param array      $term Term data.
+	 * @param WP_Term|array $term Term data.
 	 * @param array      $item Item data.
 	 * @return int|WP_Error
 	 */
-	private function create_variation( WC_Product $product, $taxonomy, WP_Term $term, array $item ) {
+	private function create_variation( WC_Product $product, $taxonomy, $term, array $item ) {
+		if ( is_array( $term ) ) {
+			$term = (object) $term;
+		}
+
+		if ( ! $term instanceof WP_Term && ! isset( $term->slug ) ) {
+			return new WP_Error( 'bvcg_term_error', __( 'Unable to load the generated term.', 'bulk-variation-code-generator' ) );
+		}
+
 		$variation = new WC_Product_Variation();
 		$variation->set_parent_id( $product->get_id() );
 		$variation->set_status( 'publish' );
@@ -817,6 +832,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	private function sideload_image_to_media_library( array $file ) {
 		if ( ! isset( $file['error'] ) || UPLOAD_ERR_OK !== (int) $file['error'] ) {
 			return new WP_Error( 'bvcg_upload_error', __( 'One of the image uploads failed.', 'bulk-variation-code-generator' ) );
+		}
+
+		if ( isset( $file['size'] ) && (int) $file['size'] > self::MAX_IMAGE_UPLOAD_SIZE ) {
+			return new WP_Error(
+				'bvcg_image_too_large',
+				sprintf(
+					/* translators: 1: size limit in GB. */
+					__( 'Each image must be 10 GB or smaller. The selected file is too large.', 'bulk-variation-code-generator' ),
+					10
+				)
+			);
 		}
 
 		$filetype = wp_check_filetype_and_ext( $file['tmp_name'], $file['name'] );

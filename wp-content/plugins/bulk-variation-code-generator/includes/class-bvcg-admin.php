@@ -134,7 +134,7 @@ class BVCG_Admin {
 					<p class="form-field bvcg-field">
 						<label for="bvcg_image_files"><?php esc_html_e( 'Bulk Variation Images', 'bulk-variation-code-generator' ); ?></label>
 						<input type="file" id="bvcg_image_files" name="variation_images[]" accept="image/*" multiple>
-						<span class="description"><?php esc_html_e( 'Match each image filename to a generated code. Example: BR-EN-001.jpg will attach to BR-EN-001 and auto-fill image SEO fields from the product and variation code.', 'bulk-variation-code-generator' ); ?></span>
+							<span class="description"><?php esc_html_e( 'Match each image filename to a generated code. Example: BR-EN-001.jpg will attach to BR-EN-001 and auto-fill image SEO fields from the product and variation code. Each image can be up to 10 GB.', 'bulk-variation-code-generator' ); ?></span>
 					</p>
 
 					<div class="bvcg-seo-template">
@@ -233,13 +233,14 @@ class BVCG_Admin {
 					'error'             => __( 'An error occurred.', 'bulk-variation-code-generator' ),
 					'noPreview'         => __( 'Select an attribute and enter a range to preview generated codes.', 'bulk-variation-code-generator' ),
 					'saveFirst'         => __( 'Save the product before generating variations.', 'bulk-variation-code-generator' ),
-					'noImagesSelected'  => __( 'No images selected.', 'bulk-variation-code-generator' ),
-					'imagesSelected'    => __( 'selected images', 'bulk-variation-code-generator' ),
-					'matchedImages'     => __( 'matched by filename', 'bulk-variation-code-generator' ),
-				),
-			)
-			);
-		}
+						'noImagesSelected'  => __( 'No images selected.', 'bulk-variation-code-generator' ),
+						'imagesSelected'    => __( 'selected images', 'bulk-variation-code-generator' ),
+						'matchedImages'     => __( 'matched by filename', 'bulk-variation-code-generator' ),
+						'imageTooLarge'     => __( 'Each image must be 10 GB or smaller.', 'bulk-variation-code-generator' ),
+					),
+				)
+				);
+			}
 
 	/**
 	 * Returns global product attributes.

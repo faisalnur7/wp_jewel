@@ -3,8 +3,19 @@
 
 	const state = {
 		running: false,
-		csvText: ''
+		csvText: '',
+		maxImageSize: 10 * 1024 * 1024 * 1024
 	};
+
+	function getOversizedImageName(files) {
+		for (let index = 0; index < files.length; index++) {
+			if (files[index].size > state.maxImageSize) {
+				return files[index].name || '';
+			}
+		}
+
+		return '';
+	}
 
 	function getFormData() {
 		return {
@@ -32,17 +43,23 @@
 		formData.append('action', action);
 		formData.append('nonce', bvcgData.nonce);
 
-		Object.keys(payload).forEach(function (key) {
-			formData.append(key, payload[key]);
-		});
-
-		const imageInput = document.getElementById('bvcg_image_files');
-
-		if (imageInput && imageInput.files && imageInput.files.length) {
-			Array.from(imageInput.files).forEach(function (file) {
-				formData.append('variation_images[]', file, file.name);
+			Object.keys(payload).forEach(function (key) {
+				formData.append(key, payload[key]);
 			});
-		}
+
+			const imageInput = document.getElementById('bvcg_image_files');
+
+			if (imageInput && imageInput.files && imageInput.files.length) {
+				const oversizedFile = getOversizedImageName(Array.from(imageInput.files));
+
+				if (oversizedFile) {
+					return null;
+				}
+
+				Array.from(imageInput.files).forEach(function (file) {
+					formData.append('variation_images[]', file, file.name);
+				});
+			}
 
 		return formData;
 	}
@@ -203,13 +220,20 @@
 			return;
 		}
 
-		const payload = getFormData();
-		const productId = parseInt(payload.product_id, 10) || 0;
+			const payload = getFormData();
+			const productId = parseInt(payload.product_id, 10) || 0;
+			const imageInput = document.getElementById('bvcg_image_files');
+			const oversizedFile = imageInput && imageInput.files ? getOversizedImageName(Array.from(imageInput.files)) : '';
 
-		if (!productId) {
-			setStatus(bvcgData.strings.saveFirst, true);
-			return;
-		}
+			if (!productId) {
+				setStatus(bvcgData.strings.saveFirst, true);
+				return;
+			}
+
+			if (oversizedFile) {
+				setStatus((bvcgData.strings.imageTooLarge || 'Each image must be 10 GB or smaller.') + ' ' + oversizedFile, true);
+				return;
+			}
 
 		state.running = true;
 		$('#bvcg_generate_button').prop('disabled', true);
