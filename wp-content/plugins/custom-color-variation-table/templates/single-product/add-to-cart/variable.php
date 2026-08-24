@@ -47,7 +47,7 @@ if ( ! $variation_attribute_name ) {
 }
 
 $quantity_step = absint( get_post_meta( $product->get_id(), '_ccvt_quantity_step', true ) );
-if ( ! in_array( $quantity_step, array( 1, 6 ), true ) ) {
+if ( ! in_array( $quantity_step, array( 1, 3 ), true ) ) {
     $quantity_step = 1;
 }
 

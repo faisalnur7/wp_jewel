@@ -17,7 +17,7 @@ $total_min_price     = 0;
 $total_max_price     = 0;
 $quantity_step       = absint( get_post_meta( $product->get_id(), '_ccvt_quantity_step', true ) );
 
-if ( ! in_array( $quantity_step, array( 1, 6 ), true ) ) {
+if ( ! in_array( $quantity_step, array( 1, 3 ), true ) ) {
 	$quantity_step = 1;
 }
 

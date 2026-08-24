@@ -14,12 +14,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	/**
 	 * Default batch size.
 	 */
-	const DEFAULT_BATCH_SIZE = 32;
+	const DEFAULT_BATCH_SIZE = 8;
 
 	/**
 	 * Maximum allowed image upload size.
 	 */
 	const MAX_IMAGE_UPLOAD_SIZE = 10737418240;
+
+	/**
+	 * Maximum number of generated variations in one job.
+	 */
+	const MAX_JOB_ITEMS = 10000;
+
+	/**
+	 * Job lock lifetime in seconds.
+	 */
+	const JOB_LOCK_TTL = 300;
 
 	/**
 	 * Creates a generation job from posted data.
@@ -40,26 +50,45 @@ if ( ! defined( 'ABSPATH' ) ) {
 			return new WP_Error( 'bvcg_invalid_product', __( 'Only variable products can be processed.', 'bulk-variation-code-generator' ) );
 		}
 
-		$term_ids = $this->prime_terms_for_items( $normalized['attribute']['taxonomy'], $normalized['items'] );
+		$image_map_error = $this->validate_image_map( $normalized['image_map'] );
 
-		if ( is_wp_error( $term_ids ) ) {
-			return $term_ids;
+		if ( is_wp_error( $image_map_error ) ) {
+			return $image_map_error;
 		}
 
-		$this->sync_product_attribute( $product, $normalized['attribute']['taxonomy'], $term_ids );
-
-		$image_payload = $this->prepare_uploaded_images( $normalized['items'] );
+		if ( ! empty( $normalized['image_map'] ) ) {
+			$image_payload = array(
+				'map'   => $normalized['image_map'],
+				'stats' => array(
+					'selected'  => count( $normalized['image_map'] ),
+					'matched'   => count( $normalized['image_map'] ),
+					'unmatched' => 0,
+					'errors'    => array(),
+				),
+			);
+		} else {
+			$image_payload = $this->prepare_uploaded_images( $normalized['items'] );
+		}
 
 		if ( is_wp_error( $image_payload ) ) {
 			return $image_payload;
 		}
+
+		$term_ids = $this->prime_terms_for_items( $normalized['attribute']['taxonomy'], $normalized['items'] );
+
+		if ( is_wp_error( $term_ids ) ) {
+			$this->cleanup_uploaded_images( $image_payload['map'] );
+			return $term_ids;
+		}
+
+		$this->sync_product_attribute( $product, $normalized['attribute']['taxonomy'], $term_ids );
 
 		$seo_template = $this->normalize_seo_template( $payload );
 
 		$token = wp_generate_uuid4();
 		$key   = $this->get_job_key( $token );
 
-		set_transient(
+		$job_saved = set_transient(
 			$key,
 			array(
 				'created_at' => time(),
@@ -81,6 +110,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			12 * HOUR_IN_SECONDS
 		);
 
+		if ( ! $job_saved ) {
+			$this->cleanup_uploaded_images( $image_payload['map'] );
+
+			return new WP_Error( 'bvcg_job_save_failed', __( 'The generation job could not be saved. Please try again.', 'bulk-variation-code-generator' ) );
+		}
+
 		return array(
 			'token'   => $token,
 			'preview' => $this->build_preview( $normalized['items'] ),
@@ -94,15 +129,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 *
 	 * @param string $token Job token.
 	 * @param int    $batch_size Batch size.
+	 * @param int    $product_id Product ID from the request.
 	 * @return array|WP_Error
 	 */
-	public function process_job( $token, $batch_size = self::DEFAULT_BATCH_SIZE ) {
+	public function process_job( $token, $batch_size = self::DEFAULT_BATCH_SIZE, $product_id = 0 ) {
 		$token = sanitize_text_field( (string) $token );
 		$key   = $this->get_job_key( $token );
 		$job   = get_transient( $key );
 
 		if ( empty( $job ) || ! is_array( $job ) ) {
 			return new WP_Error( 'bvcg_missing_job', __( 'The generation job could not be found or has expired.', 'bulk-variation-code-generator' ) );
+		}
+
+		$product_id = absint( $product_id );
+
+		if ( $product_id !== absint( $job['product_id'] ) ) {
+			return new WP_Error( 'bvcg_job_product_mismatch', __( 'This generation job does not belong to the selected product.', 'bulk-variation-code-generator' ) );
+		}
+
+		if ( ! $this->acquire_job_lock( $token ) ) {
+			return new WP_Error( 'bvcg_job_locked', __( 'This generation job is already being processed. Please try again shortly.', 'bulk-variation-code-generator' ) );
 		}
 
 		$batch_size = max( 1, absint( $batch_size ) );
@@ -112,6 +158,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		if ( empty( $items ) ) {
 			delete_transient( $key );
+			$this->release_job_lock( $token );
 
 			return array(
 				'total'     => 0,
@@ -127,6 +174,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		if ( ! $product || ! $product->is_type( 'variable' ) ) {
 			delete_transient( $key );
+			$this->release_job_lock( $token );
 
 			return new WP_Error( 'bvcg_invalid_product', __( 'Only variable products can be processed.', 'bulk-variation-code-generator' ) );
 		}
@@ -210,6 +258,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		if ( $processed >= $total ) {
 			delete_transient( $key );
+			$this->release_job_lock( $token );
 
 			return array(
 				'total'     => $total,
@@ -233,6 +282,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$job['errors']    = $errors;
 
 		set_transient( $key, $job, 12 * HOUR_IN_SECONDS );
+		$this->release_job_lock( $token );
 
 		return array(
 			'total'     => $total,
@@ -251,9 +301,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 * Normalizes request data into a validated generation payload.
 	 *
 	 * @param array $payload Payload.
+	 * @param bool  $convert_product_type Whether to persist a Variable product type.
 	 * @return array|WP_Error
 	 */
-	public function normalize_payload( array $payload ) {
+	public function normalize_payload( array $payload, $convert_product_type = true ) {
 		$product_id = isset( $payload['product_id'] ) ? absint( $payload['product_id'] ) : 0;
 		$product    = wc_get_product( $product_id );
 
@@ -261,8 +312,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 			return new WP_Error( 'bvcg_invalid_product', __( 'Invalid product.', 'bulk-variation-code-generator' ) );
 		}
 
+		$needs_variable_conversion = false;
+
 		if ( ! $product->is_type( 'variable' ) ) {
-			return new WP_Error( 'bvcg_not_variable', __( 'Only variable products are supported.', 'bulk-variation-code-generator' ) );
+			$requested_type = isset( $payload['product_type'] ) ? sanitize_text_field( wp_unslash( $payload['product_type'] ) ) : '';
+
+			if ( 'variable' !== $requested_type ) {
+				return new WP_Error( 'bvcg_not_variable', __( 'Only variable products are supported. Select Variable product first.', 'bulk-variation-code-generator' ) );
+			}
+
+			$needs_variable_conversion = (bool) $convert_product_type;
 		}
 
 		$attribute_taxonomy = isset( $payload['attribute'] ) ? sanitize_text_field( wp_unslash( $payload['attribute'] ) ) : '';
@@ -277,10 +336,51 @@ if ( ! defined( 'ABSPATH' ) ) {
 			return $ranges;
 		}
 
+		$estimated_items = 0;
+
+		foreach ( $ranges as $range ) {
+			$estimated_items += max( 0, absint( $range['end'] ) - absint( $range['start'] ) + 1 );
+
+			if ( $estimated_items > self::MAX_JOB_ITEMS ) {
+				return new WP_Error(
+					'bvcg_too_many_items',
+					sprintf( __( 'This job contains too many variations. The maximum is %d.', 'bulk-variation-code-generator' ), self::MAX_JOB_ITEMS )
+				);
+			}
+		}
+
 		$items = $this->build_items_from_ranges( $ranges );
+
+		if ( count( $items ) > self::MAX_JOB_ITEMS ) {
+			return new WP_Error(
+				'bvcg_too_many_items',
+				sprintf( __( 'This job contains too many variations. The maximum is %d.', 'bulk-variation-code-generator' ), self::MAX_JOB_ITEMS )
+			);
+		}
 
 		if ( empty( $items ) ) {
 			return new WP_Error( 'bvcg_no_items', __( 'No valid codes were generated.', 'bulk-variation-code-generator' ) );
+		}
+
+		if ( $needs_variable_conversion ) {
+			$result = wp_set_object_terms( $product_id, 'variable', 'product_type' );
+
+			if ( is_wp_error( $result ) ) {
+				return new WP_Error( 'bvcg_type_save_failed', __( 'The product could not be changed to Variable product.', 'bulk-variation-code-generator' ) );
+			}
+
+			clean_post_cache( $product_id );
+
+			if ( class_exists( 'WC_Cache_Helper' ) ) {
+				WC_Cache_Helper::invalidate_cache_group( 'product_' . $product_id );
+			}
+
+			wc_delete_product_transients( $product_id );
+			$product = wc_get_product( $product_id );
+
+			if ( ! $product || ! $product->is_type( 'variable' ) ) {
+				return new WP_Error( 'bvcg_not_variable', __( 'The product could not be changed to Variable product.', 'bulk-variation-code-generator' ) );
+			}
 		}
 
 		return array(
@@ -289,6 +389,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				'taxonomy' => $attribute_taxonomy,
 			),
 			'items'      => $items,
+			'image_map'  => isset( $payload['image_map'] ) && is_array( $payload['image_map'] ) ? $payload['image_map'] : array(),
 		);
 	}
 
@@ -320,6 +421,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 	}
 
 	/**
+	 * Acquires a short-lived lock for a job.
+	 *
+	 * @param string $token Job token.
+	 * @return bool
+	 */
+	private function acquire_job_lock( $token ) {
+		$key = 'bvcg_lock_' . sanitize_key( $token );
+		$now = time();
+		$lock = get_option( $key );
+
+		if ( false !== $lock && $now - absint( $lock ) < self::JOB_LOCK_TTL ) {
+			return false;
+		}
+
+		if ( false !== $lock ) {
+			delete_option( $key );
+		}
+
+		return add_option( $key, $now, '', 'no' );
+	}
+
+	/**
+	 * Releases a job lock.
+	 *
+	 * @param string $token Job token.
+	 * @return void
+	 */
+	private function release_job_lock( $token ) {
+		delete_option( 'bvcg_lock_' . sanitize_key( $token ) );
+	}
+
+	/**
 	 * Extracts range definitions from the payload.
 	 *
 	 * @param array $payload Payload.
@@ -340,7 +473,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				'digits'       => isset( $payload['digits'] ) ? absint( $payload['digits'] ) : 3,
 				'price'        => isset( $payload['price'] ) ? sanitize_text_field( wp_unslash( $payload['price'] ) ) : '',
 				'sku_prefix'   => isset( $payload['sku_prefix'] ) ? sanitize_text_field( wp_unslash( $payload['sku_prefix'] ) ) : '',
-				'stock_qty'    => isset( $payload['stock_qty'] ) ? absint( $payload['stock_qty'] ) : 100,
+				'stock_qty'    => isset( $payload['stock_qty'] ) ? $payload['stock_qty'] : 100,
 			);
 		}
 
@@ -354,8 +487,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'digits'     => isset( $payload['digits'] ) ? absint( $payload['digits'] ) : 3,
 			'price'      => isset( $payload['price'] ) ? sanitize_text_field( wp_unslash( $payload['price'] ) ) : '',
 			'sku_prefix' => isset( $payload['sku_prefix'] ) ? sanitize_text_field( wp_unslash( $payload['sku_prefix'] ) ) : '',
-			'stock_qty'  => isset( $payload['stock_qty'] ) ? absint( $payload['stock_qty'] ) : 100,
+			'stock_qty'  => isset( $payload['stock_qty'] ) ? $payload['stock_qty'] : 100,
 		);
+		$fallback['stock_qty'] = $this->normalize_stock_quantity( $fallback['stock_qty'] );
+
+		if ( is_wp_error( $fallback['stock_qty'] ) ) {
+			return $fallback['stock_qty'];
+		}
 
 		foreach ( $ranges as $range ) {
 			$prefix = isset( $range['prefix'] ) && '' !== $range['prefix'] ? sanitize_text_field( (string) $range['prefix'] ) : $fallback['prefix'];
@@ -364,7 +502,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$digits  = isset( $range['digits'] ) ? absint( $range['digits'] ) : $fallback['digits'];
 			$price   = isset( $range['price'] ) && '' !== $range['price'] ? sanitize_text_field( (string) $range['price'] ) : $fallback['price'];
 			$sku     = isset( $range['sku_prefix'] ) && '' !== $range['sku_prefix'] ? sanitize_text_field( (string) $range['sku_prefix'] ) : $fallback['sku_prefix'];
-			$stock   = isset( $range['stock_qty'] ) && '' !== $range['stock_qty'] ? absint( $range['stock_qty'] ) : $fallback['stock_qty'];
+			$stock   = isset( $range['stock_qty'] ) && '' !== trim( (string) $range['stock_qty'] ) ? $this->normalize_stock_quantity( $range['stock_qty'] ) : $fallback['stock_qty'];
+
+			if ( is_wp_error( $stock ) ) {
+				return $stock;
+			}
 
 			if ( '' === $prefix ) {
 				return new WP_Error( 'bvcg_empty_prefix', __( 'Prefix cannot be empty.', 'bulk-variation-code-generator' ) );
@@ -394,6 +536,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 
 		return $normalized;
+	}
+
+	/**
+	 * Validates a stock quantity without converting invalid values silently.
+	 *
+	 * @param mixed $value Quantity value.
+	 * @return int|WP_Error
+	 */
+	private function normalize_stock_quantity( $value ) {
+		$value = trim( (string) $value );
+
+		if ( '' === $value ) {
+			return 100;
+		}
+
+		if ( ! preg_match( '/^\d+$/', $value ) || false === filter_var( $value, FILTER_VALIDATE_INT, array( 'options' => array( 'min_range' => 0 ) ) ) ) {
+			return new WP_Error( 'bvcg_invalid_stock_quantity', __( 'Stock quantity must be a whole number greater than or equal to zero.', 'bulk-variation-code-generator' ) );
+		}
+
+		return (int) $value;
 	}
 
 	/**
@@ -785,6 +947,77 @@ if ( ! defined( 'ABSPATH' ) ) {
 	}
 
 	/**
+	 * Imports one uploaded image and returns its variation-code mapping.
+	 *
+	 * @param array $file Uploaded file.
+	 * @param int   $parent_id Product ID to own the attachment.
+	 * @return array|WP_Error
+	 */
+	public function upload_image( array $file, $parent_id = 0 ) {
+		$this->load_media_upload_dependencies();
+
+		if ( empty( $file['name'] ) ) {
+			return new WP_Error( 'bvcg_upload_error', __( 'No image was received.', 'bulk-variation-code-generator' ) );
+		}
+
+		$file['name'] = sanitize_file_name( wp_basename( $file['name'] ) );
+		$attachment_id = $this->sideload_image_to_media_library( $file, absint( $parent_id ) );
+
+		if ( is_wp_error( $attachment_id ) ) {
+			return $attachment_id;
+		}
+
+		$code_key = $this->normalize_code_key( pathinfo( $file['name'], PATHINFO_FILENAME ) );
+
+		if ( '' === $code_key ) {
+			wp_delete_attachment( (int) $attachment_id, true );
+
+			return new WP_Error( 'bvcg_image_mapping_error', __( 'The image filename could not be matched to a variation code.', 'bulk-variation-code-generator' ) );
+		}
+
+		return array(
+			'key'           => $code_key,
+			'attachment_id' => (int) $attachment_id,
+			'name'          => $file['name'],
+		);
+	}
+
+	/**
+	 * Removes imported images when job creation cannot continue.
+	 *
+	 * @param array $image_map Image IDs keyed by code.
+	 * @return void
+	 */
+	private function cleanup_uploaded_images( array $image_map ) {
+		foreach ( $image_map as $attachment_id ) {
+			wp_delete_attachment( absint( $attachment_id ), true );
+		}
+	}
+
+	/**
+	 * Ensures client-provided image IDs are valid media attachments.
+	 *
+	 * @param array $image_map Image IDs keyed by code.
+	 * @return true|WP_Error
+	 */
+	private function validate_image_map( array $image_map ) {
+		foreach ( $image_map as $attachment_id ) {
+			$attachment_id = absint( $attachment_id );
+			$attachment    = $attachment_id ? get_post( $attachment_id ) : false;
+
+			if ( ! $attachment || 'attachment' !== $attachment->post_type || ! wp_attachment_is_image( $attachment_id ) ) {
+				return new WP_Error( 'bvcg_invalid_image', __( 'One or more selected images are no longer available. Please upload them again.', 'bulk-variation-code-generator' ) );
+			}
+
+			if ( ! current_user_can( 'edit_post', $attachment_id ) ) {
+				return new WP_Error( 'bvcg_image_forbidden', __( 'You do not have permission to use one or more selected images.', 'bulk-variation-code-generator' ) );
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Flattens the $_FILES array for multiple upload inputs.
 	 *
 	 * @param array $files Upload array.
@@ -829,7 +1062,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 * @param array $file File array.
 	 * @return int|WP_Error
 	 */
-	private function sideload_image_to_media_library( array $file ) {
+	private function sideload_image_to_media_library( array $file, $parent_id = 0 ) {
 		if ( ! isset( $file['error'] ) || UPLOAD_ERR_OK !== (int) $file['error'] ) {
 			return new WP_Error( 'bvcg_upload_error', __( 'One of the image uploads failed.', 'bulk-variation-code-generator' ) );
 		}
@@ -851,7 +1084,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			return new WP_Error( 'bvcg_invalid_image', __( 'Only image files can be uploaded.', 'bulk-variation-code-generator' ) );
 		}
 
-		$attachment_id = media_handle_sideload( $file, 0 );
+		$attachment_id = media_handle_sideload( $file, absint( $parent_id ) );
 
 		if ( is_wp_error( $attachment_id ) ) {
 			return $attachment_id;

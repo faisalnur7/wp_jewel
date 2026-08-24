@@ -82,6 +82,13 @@ final class BVCG_Plugin {
 				$wpdb->esc_like( '_transient_timeout_bvcg_job_' ) . '%'
 			)
 		);
+
+		$wpdb->query(
+			$wpdb->prepare(
+				"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
+				$wpdb->esc_like( 'bvcg_lock_' ) . '%'
+			)
+		);
 	}
 
 	/**
@@ -147,4 +154,3 @@ final class BVCG_Plugin {
 		echo '<div class="notice notice-error"><p>' . esc_html__( 'Bulk Variation Code Generator requires WooCommerce to be active.', 'bulk-variation-code-generator' ) . '</p></div>';
 	}
 }
-

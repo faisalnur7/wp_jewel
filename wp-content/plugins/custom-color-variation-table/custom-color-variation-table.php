@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Custom_Color_Variation_Table {
-    private $allowed_quantity_steps = array( 1, 6 );
+    private $allowed_quantity_steps = array( 1, 3 );
 
     public function __construct() {
         add_action( 'plugins_loaded', array( $this, 'init' ), 20 );
@@ -398,6 +398,8 @@ class Custom_Color_Variation_Table {
 
         $style_path = plugin_dir_path( __FILE__ ) . 'assets/css/custom-color-variation-table.css';
         $script_path = plugin_dir_path( __FILE__ ) . 'assets/js/custom-color-variation-table.js';
+        $swiper_script_path = WP_PLUGIN_DIR . '/elementor/assets/lib/swiper/v8/swiper.min.js';
+        $swiper_style_path  = WP_PLUGIN_DIR . '/elementor/assets/lib/swiper/v8/css/swiper.min.css';
         $style_ver   = file_exists( $style_path ) ? filemtime( $style_path ) : '1.0.0';
         $script_ver  = file_exists( $script_path ) ? filemtime( $script_path ) : '1.0.0';
 
@@ -415,6 +417,25 @@ class Custom_Color_Variation_Table {
             $script_ver,
             true
         );
+
+        if ( file_exists( $swiper_style_path ) ) {
+            wp_enqueue_style(
+                'ccvt-swiper',
+                plugins_url( 'assets/lib/swiper/v8/css/swiper.min.css', WP_PLUGIN_DIR . '/elementor/elementor.php' ),
+                array(),
+                filemtime( $swiper_style_path )
+            );
+        }
+
+        if ( file_exists( $swiper_script_path ) ) {
+            wp_enqueue_script(
+                'ccvt-swiper',
+                plugins_url( 'assets/lib/swiper/v8/swiper.min.js', WP_PLUGIN_DIR . '/elementor/elementor.php' ),
+                array(),
+                filemtime( $swiper_script_path ),
+                true
+            );
+        }
 
         wp_localize_script(
             'ccvt-script',

@@ -178,6 +178,7 @@ class BVCG_Admin {
 
 				<div class="bvcg-actions">
 					<button type="button" class="button button-primary button-large" id="bvcg_generate_button"><?php esc_html_e( 'Generate Variations', 'bulk-variation-code-generator' ); ?></button>
+					<button type="button" class="button" id="bvcg_resume_button" hidden><?php esc_html_e( 'Resume Generation', 'bulk-variation-code-generator' ); ?></button>
 					<span id="bvcg_status" class="bvcg-status" aria-live="polite"></span>
 				</div>
 			</div>

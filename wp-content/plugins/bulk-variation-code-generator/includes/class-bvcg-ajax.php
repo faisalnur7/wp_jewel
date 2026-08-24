@@ -27,6 +27,7 @@ class BVCG_Ajax {
 		$this->generator = $generator;
 
 		add_action( 'wp_ajax_bvcg_preview', array( $this, 'preview' ) );
+		add_action( 'wp_ajax_bvcg_upload_image', array( $this, 'upload_image' ) );
 		add_action( 'wp_ajax_bvcg_create_job', array( $this, 'create_job' ) );
 		add_action( 'wp_ajax_bvcg_process_job', array( $this, 'process_job' ) );
 	}
@@ -40,11 +41,12 @@ class BVCG_Ajax {
 		$this->verify_request();
 
 		$payload = $this->get_payload_from_request();
-		$result  = $this->generator->normalize_payload( $payload );
+		$result  = $this->generator->normalize_payload( $payload, false );
 
 		if ( is_wp_error( $result ) ) {
 			wp_send_json_error(
 				array(
+					'code'    => $result->get_error_code(),
 					'message' => $result->get_error_message(),
 				)
 			);
@@ -70,6 +72,39 @@ class BVCG_Ajax {
 		if ( is_wp_error( $result ) ) {
 			wp_send_json_error(
 				array(
+					'code'    => $result->get_error_code(),
+					'message' => $result->get_error_message(),
+				)
+			);
+		}
+
+		wp_send_json_success( $result );
+	}
+
+	/**
+	 * Imports one variation image per request.
+	 *
+	 * @return void
+	 */
+	public function upload_image() {
+		$this->verify_request();
+
+		if ( ! current_user_can( 'upload_files' ) ) {
+			wp_send_json_error(
+				array(
+					'code'    => 'bvcg_upload_forbidden',
+					'message' => __( 'You do not have permission to upload images.', 'bulk-variation-code-generator' ),
+				)
+			);
+		}
+
+		$file = isset( $_FILES['variation_image'] ) && is_array( $_FILES['variation_image'] ) ? $_FILES['variation_image'] : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$result = $this->generator->upload_image( $file, absint( $_POST['product_id'] ) );
+
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error(
+				array(
+					'code'    => $result->get_error_code(),
 					'message' => $result->get_error_message(),
 				)
 			);
@@ -88,6 +123,7 @@ class BVCG_Ajax {
 
 		$token = isset( $_POST['job_token'] ) ? sanitize_text_field( wp_unslash( $_POST['job_token'] ) ) : '';
 		$batch = isset( $_POST['batch_size'] ) ? absint( $_POST['batch_size'] ) : BVCG_Generator::DEFAULT_BATCH_SIZE;
+		$product_id = isset( $_POST['product_id'] ) ? absint( $_POST['product_id'] ) : 0;
 
 		if ( '' === $token ) {
 			wp_send_json_error(
@@ -97,11 +133,12 @@ class BVCG_Ajax {
 			);
 		}
 
-		$result = $this->generator->process_job( $token, $batch );
+		$result = $this->generator->process_job( $token, $batch, $product_id );
 
 		if ( is_wp_error( $result ) ) {
 			wp_send_json_error(
 				array(
+					'code'    => $result->get_error_code(),
 					'message' => $result->get_error_message(),
 				)
 			);
@@ -142,11 +179,31 @@ class BVCG_Ajax {
 			'start'       => isset( $_POST['start'] ) ? absint( $_POST['start'] ) : 0,
 			'end'         => isset( $_POST['end'] ) ? absint( $_POST['end'] ) : 0,
 			'digits'      => isset( $_POST['digits'] ) ? absint( $_POST['digits'] ) : 3,
+			'product_type' => isset( $_POST['product_type'] ) ? sanitize_text_field( wp_unslash( $_POST['product_type'] ) ) : '',
 			'price'       => isset( $_POST['price'] ) ? wp_unslash( $_POST['price'] ) : '',
 			'sku_prefix'  => isset( $_POST['sku_prefix'] ) ? wp_unslash( $_POST['sku_prefix'] ) : '',
-			'stock_qty'   => isset( $_POST['stock_qty'] ) ? absint( $_POST['stock_qty'] ) : 100,
+			'stock_qty'   => isset( $_POST['stock_qty'] ) ? sanitize_text_field( wp_unslash( $_POST['stock_qty'] ) ) : 100,
+			'seo_title'   => isset( $_POST['seo_title'] ) ? wp_unslash( $_POST['seo_title'] ) : '',
+			'seo_alt'     => isset( $_POST['seo_alt'] ) ? wp_unslash( $_POST['seo_alt'] ) : '',
+			'seo_caption' => isset( $_POST['seo_caption'] ) ? wp_unslash( $_POST['seo_caption'] ) : '',
+			'seo_description' => isset( $_POST['seo_description'] ) ? wp_unslash( $_POST['seo_description'] ) : '',
+			'image_map'   => array(),
 			'csv_text'    => isset( $_POST['csv_text'] ) ? wp_unslash( $_POST['csv_text'] ) : '',
 		);
+
+		if ( ! empty( $_POST['image_map'] ) ) {
+			$image_map = json_decode( wp_unslash( $_POST['image_map'] ), true );
+
+			if ( is_array( $image_map ) ) {
+				foreach ( $image_map as $key => $attachment_id ) {
+					$key = sanitize_key( $key );
+
+					if ( '' !== $key && absint( $attachment_id ) > 0 ) {
+						$payload['image_map'][ $key ] = absint( $attachment_id );
+					}
+				}
+			}
+		}
 
 		if ( ! empty( $_POST['ranges'] ) ) {
 			$ranges_raw = wp_unslash( $_POST['ranges'] );
@@ -160,4 +217,3 @@ class BVCG_Ajax {
 		return $payload;
 	}
 }
-

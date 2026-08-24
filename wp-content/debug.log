@@ -898,3 +898,4 @@ Stack trace:
 #13 {main}
   thrown in /var/www/html/wp-content/plugins/elementor/modules/cloud-library/module.php on line 190
 [16-Aug-2026 10:19:48 UTC] PHP Warning:  Packets out of order. Expected 1 received 0. Packet size=145 in /var/www/html/wp-includes/class-wpdb.php on line 2351
+[22-Aug-2026 20:04:55 UTC] WordPress database error Duplicate entry '1363-10' for key 'wp_term_relationships.PRIMARY' for query INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`) VALUES (1363, 10) made by do_action('wp_ajax_bvcg_preview'), WP_Hook->do_action, WP_Hook->apply_filters, BVCG_Ajax->preview, BVCG_Generator->normalize_payload, wp_set_object_terms
