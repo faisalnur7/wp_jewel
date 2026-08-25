@@ -194,133 +194,131 @@
         var $thumbs = $form.find( '.ccvt-gallery-thumbs' );
         var activeKey = image ? ( image.fullSrc || image.galleryThumbnailSrc || image.src ) : '';
         var activeThumbKey = image ? ( image.galleryThumbnailSrc || image.thumbSrc || image.src ) : '';
+        var swiper = getGallerySwiperInstance( $form );
 
         $thumbs.find( '.ccvt-gallery-thumb' ).removeClass( 'is-active' );
 
         if ( activeKey ) {
-            $thumbs.find( '.ccvt-gallery-thumb' ).filter( function() {
+            var $activeThumb = $thumbs.find( '.ccvt-gallery-thumb' ).filter( function() {
                 var $thumb = $( this );
                 var galleryKey = String( $thumb.data( 'gallery-key' ) || '' );
                 var thumbKey = String( $thumb.data( 'thumb-key' ) || '' );
 
                 return galleryKey === String( activeKey ) || thumbKey === String( activeThumbKey ) || galleryKey === String( activeThumbKey );
-            } ).addClass( 'is-active' );
-        }
-    }
+            } ).addClass( 'is-active' ).first();
 
-    function getGalleryCarouselWrap( $form ) {
-        return $form.find( '.ccvt-gallery-thumbs-wrap' ).first();
-    }
-
-    function getGalleryCarouselViewport( $form ) {
-        return $form.find( '.ccvt-gallery-thumbs-viewport' ).first();
-    }
-
-    function getGalleryCarouselTrack( $form ) {
-        return $form.find( '.ccvt-gallery-thumbs' ).first();
-    }
-
-    function getThumbMetrics( $viewport ) {
-        var $thumb = $viewport.find( '.ccvt-gallery-thumb' ).first();
-        var thumbWidth = $thumb.length ? $thumb.outerWidth( true ) : 94;
-        var gap = 12;
-
-        if ( $thumb.length ) {
-            var track = $viewport.find( '.ccvt-gallery-thumbs' ).first().get( 0 );
-            if ( track ) {
-                var computed = window.getComputedStyle( track );
-                gap = parseFloat( computed.columnGap || computed.gap || '12' ) || 12;
-            }
-        }
-
-        return {
-            thumbWidth: thumbWidth,
-            gap: gap
-        };
-    }
-
-    function getCarouselState( $form ) {
-        var $viewport = getGalleryCarouselViewport( $form );
-        var $track = getGalleryCarouselTrack( $form );
-        var viewport = $viewport.get( 0 );
-        var metrics = getThumbMetrics( $viewport );
-        var total = $track.find( '.ccvt-gallery-thumb' ).length;
-        var visibleCount = 1;
-        var maxIndex = 0;
-        var index = parseInt( $track.attr( 'data-carousel-index' ), 10 );
-
-        if ( isNaN( index ) || index < 0 ) {
-            index = 0;
-        }
-
-        if ( viewport && metrics.thumbWidth > 0 ) {
-            visibleCount = Math.max( 1, Math.floor( ( viewport.clientWidth + metrics.gap ) / ( metrics.thumbWidth + metrics.gap ) ) );
-            maxIndex = Math.max( 0, total - visibleCount );
-        }
-
-        if ( index > maxIndex ) {
-            index = maxIndex;
-        }
-
-        return {
-            index: index,
-            total: total,
-            visibleCount: visibleCount,
-            maxIndex: maxIndex,
-            thumbWidth: metrics.thumbWidth,
-            gap: metrics.gap
-        };
-    }
-
-    function setCarouselIndex( $form, index, options ) {
-        var $viewport = getGalleryCarouselViewport( $form );
-        var $track = getGalleryCarouselTrack( $form );
-        var $wrap = getGalleryCarouselWrap( $form );
-        var state = getCarouselState( $form );
-        var newIndex = parseInt( index, 10 );
-
-        options = options || {};
-
-        if ( isNaN( newIndex ) ) {
-            newIndex = 0;
-        }
-
-        newIndex = Math.max( 0, Math.min( newIndex, state.maxIndex ) );
-
-        if ( ! $viewport.length || ! $track.length ) {
-            return;
-        }
-
-        $track.attr( 'data-carousel-index', newIndex );
-        $track.css( 'transform', 'translateX(' + ( -1 * newIndex * ( state.thumbWidth + state.gap ) ) + 'px)' );
-
-        if ( ! options.silent ) {
-            var $activeThumb = $track.find( '.ccvt-gallery-thumb.is-active' ).first();
-            if ( $activeThumb.length ) {
+            if ( swiper && $activeThumb.length ) {
                 var activeIndex = parseInt( $activeThumb.data( 'index' ), 10 );
-                if ( ! isNaN( activeIndex ) && ( activeIndex < newIndex || activeIndex >= newIndex + state.visibleCount ) ) {
-                    $track.attr( 'data-carousel-index', newIndex );
+                if ( ! isNaN( activeIndex ) ) {
+                    slideGallerySwiperToIndex( swiper, activeIndex );
                 }
             }
         }
     }
 
-    function ensureActiveThumbVisible( $form ) {
-        var $track = getGalleryCarouselTrack( $form );
-        var $activeThumb = $track.find( '.ccvt-gallery-thumb.is-active' ).first();
-        var state = getCarouselState( $form );
-        var activeIndex = parseInt( $activeThumb.data( 'index' ), 10 );
+    function getGallerySwiperViewport( $form ) {
+        return getGalleryScope( $form ).find( '.ccvt-gallery-thumbs-viewport.swiper' ).first();
+    }
 
-        if ( isNaN( activeIndex ) ) {
-            activeIndex = 0;
+    function getGallerySwiperTrack( $form ) {
+        return getGalleryScope( $form ).find( '.ccvt-gallery-thumbs' ).first();
+    }
+
+    function getGallerySwiperInstance( $form ) {
+        return getGalleryScope( $form ).data( 'ccvtGallerySwiper' ) || null;
+    }
+
+    function getGalleryScope( $form ) {
+        return $form.closest( '.product' ).first();
+    }
+
+    function slideGallerySwiperToIndex( swiper, index ) {
+        if ( ! swiper || isNaN( index ) ) {
+            return;
         }
 
-        if ( activeIndex < state.index ) {
-            setCarouselIndex( $form, activeIndex, { silent: true } );
-        } else if ( activeIndex >= state.index + state.visibleCount ) {
-            setCarouselIndex( $form, activeIndex - state.visibleCount + 1, { silent: true } );
+        if ( typeof swiper.slideToLoop === 'function' ) {
+            swiper.slideToLoop( index, 0, false );
         } else {
-            setCarouselIndex( $form, state.index, { silent: true } );
+            swiper.slideTo( index, 0, false );
+        }
+    }
+
+    function destroyGallerySwiper( $form ) {
+        var swiper = getGallerySwiperInstance( $form );
+        var $scope = getGalleryScope( $form );
+
+        if ( swiper && typeof swiper.destroy === 'function' ) {
+            swiper.destroy( true, true );
+        }
+
+        $scope.removeData( 'ccvtGallerySwiper' );
+    }
+
+    function initGallerySwiper( $form ) {
+        var $viewport = getGallerySwiperViewport( $form );
+        var $scope = getGalleryScope( $form );
+        var $prevButton = $scope.find( '.ccvt-gallery-button-prev' ).first();
+        var $nextButton = $scope.find( '.ccvt-gallery-button-next' ).first();
+        var SwiperConstructor = window.Swiper;
+        var swiper;
+
+        if ( ! $viewport.length || typeof SwiperConstructor !== 'function' ) {
+            return null;
+        }
+
+        destroyGallerySwiper( $form );
+
+        swiper = new SwiperConstructor( $viewport.get( 0 ), {
+            slidesPerView: 2,
+            slidesPerGroup: 1,
+            spaceBetween: 8,
+            loop: true,
+            loopPreventsSliding: false,
+            watchOverflow: false,
+            speed: 400,
+            centeredSlides: false,
+            roundLengths: true,
+            freeMode: {
+                enabled: true,
+                sticky: true,
+            },
+            observer: true,
+            observeParents: true,
+            breakpoints: {
+                768: {
+                    slidesPerView: 4,
+                    spaceBetween: 12,
+                },
+            },
+        } );
+
+        $prevButton.off( 'click.ccvtSwiperNavigation' ).on( 'click.ccvtSwiperNavigation', function( e ) {
+            e.preventDefault();
+            if ( ! swiper.destroyed ) {
+                swiper.slidePrev( 400 );
+            }
+        } );
+
+        $nextButton.off( 'click.ccvtSwiperNavigation' ).on( 'click.ccvtSwiperNavigation', function( e ) {
+            e.preventDefault();
+            if ( ! swiper.destroyed ) {
+                swiper.slideNext( 400 );
+            }
+        } );
+
+        $scope.data( 'ccvtGallerySwiper', swiper );
+
+        return swiper;
+    }
+
+    function ensureActiveThumbVisible( $form ) {
+        var swiper = getGallerySwiperInstance( $form );
+        var $activeThumb = getGallerySwiperTrack( $form ).find( '.ccvt-gallery-thumb.is-active' ).first();
+        var activeIndex = parseInt( $activeThumb.data( 'index' ), 10 );
+
+        if ( swiper && ! isNaN( activeIndex ) ) {
+            slideGallerySwiperToIndex( swiper, activeIndex );
         }
     }
 
@@ -355,9 +353,11 @@
 
     function buildVariationGallery( $form ) {
         var $gallery = getProductGallery( $form );
+        var $scope = getGalleryScope( $form );
         var images = getUniqueVariationImages( $form );
-        var existingStrip = $form.find( '.ccvt-gallery-thumbs' );
-        var existingWrap = $form.find( '.ccvt-gallery-thumbs-wrap' );
+        var existingStrip = $scope.find( '.ccvt-gallery-thumbs' );
+        var existingViewport = getGallerySwiperViewport( $form );
+        var existingWrap = $scope.find( '.ccvt-gallery-thumbs-wrap' );
         var currentKey = getCurrentGalleryImageKey( $gallery );
 
         if ( ! $gallery.length || ! images.length ) {
@@ -379,30 +379,48 @@
             return 0;
         } );
 
+        destroyGallerySwiper( $form );
+
         if ( ! existingWrap.length ) {
             existingWrap = $( '<div class="ccvt-gallery-thumbs-wrap"></div>' );
-            var $viewport = $( '<div class="ccvt-gallery-thumbs-viewport"></div>' );
-            existingStrip = $( '<div class="ccvt-gallery-thumbs" aria-label="Variation images"></div>' );
-            $viewport.append( existingStrip );
-            existingWrap.append( $viewport );
+            existingViewport = $( '<div class="ccvt-gallery-thumbs-viewport swiper"></div>' );
+            existingStrip = $( '<div class="ccvt-gallery-thumbs swiper-wrapper" aria-label="Variation images"></div>' );
+            existingViewport.append( existingStrip );
+            existingWrap.append(
+                $( '<button type="button" class="ccvt-gallery-button ccvt-gallery-button-prev swiper-button-prev" aria-label="Previous variation image"></button>' ),
+                existingViewport,
+                $( '<button type="button" class="ccvt-gallery-button ccvt-gallery-button-next swiper-button-next" aria-label="Next variation image"></button>' )
+            );
             $gallery.after( existingWrap );
         } else {
             existingStrip.empty();
             if ( ! existingWrap.parent().length ) {
                 $gallery.after( existingWrap );
             }
-            if ( ! existingStrip.parent().length ) {
-                var $existingViewport = existingWrap.find( '.ccvt-gallery-thumbs-viewport' ).first();
-                if ( ! $existingViewport.length ) {
-                    $existingViewport = $( '<div class="ccvt-gallery-thumbs-viewport"></div>' );
-                    existingWrap.append( $existingViewport );
-                }
-                $existingViewport.append( existingStrip );
+            if ( ! existingViewport.length ) {
+                existingViewport = existingWrap.find( '.ccvt-gallery-thumbs-viewport.swiper' ).first();
+            }
+            if ( ! existingStrip.length ) {
+                existingStrip = existingWrap.find( '.ccvt-gallery-thumbs' ).first();
+            }
+            if ( ! existingViewport.length ) {
+                existingViewport = $( '<div class="ccvt-gallery-thumbs-viewport swiper"></div>' );
+                existingWrap.append( existingViewport );
+            }
+            if ( ! existingStrip.length ) {
+                existingStrip = $( '<div class="ccvt-gallery-thumbs swiper-wrapper" aria-label="Variation images"></div>' );
+                existingViewport.append( existingStrip );
+            }
+            if ( ! existingWrap.find( '.ccvt-gallery-button-prev' ).length ) {
+                existingWrap.prepend( $( '<button type="button" class="ccvt-gallery-button ccvt-gallery-button-prev swiper-button-prev" aria-label="Previous variation image"></button>' ) );
+            }
+            if ( ! existingWrap.find( '.ccvt-gallery-button-next' ).length ) {
+                existingWrap.append( $( '<button type="button" class="ccvt-gallery-button ccvt-gallery-button-next swiper-button-next" aria-label="Next variation image"></button>' ) );
             }
         }
 
         images.forEach( function( image ) {
-            var thumb = $( '<button type="button" class="ccvt-gallery-thumb" />' );
+            var thumb = $( '<button type="button" class="ccvt-gallery-thumb swiper-slide" />' );
             var thumbImage = $( '<img />' );
             var label = image.alt || image.title || image.caption || image.variationId || '';
             var thumbIndex = existingStrip.find( '.ccvt-gallery-thumb' ).length;
@@ -413,9 +431,14 @@
             thumb.attr( 'data-thumb-key', image.galleryThumbnailSrc || image.thumbSrc || image.src );
             thumb.attr( 'aria-label', label ? label : 'Variation image' );
 
-            thumbImage.attr( 'src', image.galleryThumbnailSrc || image.thumbSrc || image.src );
+            thumbImage.attr( 'src', image.fullSrc || image.src || image.thumbSrc );
+            if ( image.srcset ) {
+                thumbImage.attr( 'srcset', image.srcset );
+                thumbImage.attr( 'sizes', '(max-width: 767px) 145px, 170px' );
+            }
             thumbImage.attr( 'alt', label );
             thumbImage.attr( 'loading', 'lazy' );
+            thumbImage.attr( 'decoding', 'async' );
 
             thumb.append( thumbImage );
             existingStrip.append( thumb );
@@ -443,11 +466,11 @@
             }
         } );
 
+        initGallerySwiper( $form );
         syncGalleryThumbsToImage( $form, null );
 
         if ( currentKey ) {
-            var $thumbs = $form.find( '.ccvt-gallery-thumbs' );
-            $thumbs.find( '.ccvt-gallery-thumb' ).filter( function() {
+            existingStrip.find( '.ccvt-gallery-thumb' ).filter( function() {
                 var $thumb = $( this );
                 var galleryKey = String( $thumb.data( 'gallery-key' ) || '' );
                 var thumbKey = String( $thumb.data( 'thumb-key' ) || '' );
@@ -778,7 +801,11 @@
 
         $( window ).off( 'resize.ccvtGallery' ).on( 'resize.ccvtGallery' , function() {
             $( '.ccvt-form' ).each( function() {
-                setCarouselIndex( $( this ), getCarouselState( $( this ) ).index, { silent: true } );
+                var swiper = getGallerySwiperInstance( $( this ) );
+
+                if ( swiper && typeof swiper.update === 'function' ) {
+                    swiper.update();
+                }
             } );
         } );
 

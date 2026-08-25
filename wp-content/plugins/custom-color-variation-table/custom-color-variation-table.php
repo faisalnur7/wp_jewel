@@ -410,14 +410,7 @@ class Custom_Color_Variation_Table {
             $style_ver
         );
 
-        wp_enqueue_script(
-            'ccvt-script',
-            plugin_dir_url( __FILE__ ) . 'assets/js/custom-color-variation-table.js',
-            array( 'jquery', 'wc-cart-fragments' ),
-            $script_ver,
-            true
-        );
-
+        $script_deps = array( 'jquery', 'wc-cart-fragments' );
         if ( file_exists( $swiper_style_path ) ) {
             wp_enqueue_style(
                 'ccvt-swiper',
@@ -435,7 +428,16 @@ class Custom_Color_Variation_Table {
                 filemtime( $swiper_script_path ),
                 true
             );
+            $script_deps[] = 'ccvt-swiper';
         }
+
+        wp_enqueue_script(
+            'ccvt-script',
+            plugin_dir_url( __FILE__ ) . 'assets/js/custom-color-variation-table.js',
+            $script_deps,
+            $script_ver,
+            true
+        );
 
         wp_localize_script(
             'ccvt-script',
