@@ -141,3 +141,23 @@
 		grid-template-columns: 1fr;
 	}
 }
+.bvcg-tier-pricing {
+	margin: 0 0 20px;
+}
+
+.bvcg-tier-table {
+	margin: 12px 0;
+}
+
+.bvcg-tier-table th,
+.bvcg-tier-table td {
+	padding: 8px;
+}
+
+.bvcg-tier-table input {
+	width: 100%;
+}
+
+.bvcg-tier-table .bvcg-tier-info {
+	min-width: 220px;
+}

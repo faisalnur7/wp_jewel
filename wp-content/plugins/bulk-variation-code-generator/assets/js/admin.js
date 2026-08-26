@@ -104,6 +104,22 @@
 		};
 	}
 
+	function getQuantityTiersFromForm() {
+		var tiers = [];
+
+		$('#bvcg-tier-rows .bvcg-tier-row').each(function () {
+			var $row = $(this);
+			tiers.push({
+				min: $row.find('.bvcg-tier-min').val() || '',
+				max: $row.find('.bvcg-tier-max').val() || '',
+				price: $row.find('.bvcg-tier-price').val() || '',
+				info: $row.find('.bvcg-tier-info').val() || ''
+			});
+		});
+
+		return tiers;
+	}
+
 	function buildMultipartFormData(action, includeImages) {
 		const payload = getFormData();
 		const formData = new FormData();
@@ -556,6 +572,31 @@
 	}
 
 	$(function () {
+		$(document).on('click', '#bvcg-save-tiers', function () {
+			var $button = $(this);
+			var $status = $('#bvcg-tier-status');
+
+			$button.prop('disabled', true);
+			$status.text('Saving...').removeClass('bvcg-error');
+
+			$.post(bvcgData.ajaxUrl, {
+				action: 'bvcg_save_quantity_tiers',
+				nonce: bvcgData.nonce,
+				product_id: $('#bvcg_product_id').val(),
+				tiers: JSON.stringify(getQuantityTiersFromForm()),
+			}).done(function (response) {
+				if (response && response.success) {
+					$status.text((response.data && response.data.message) || 'Saved.');
+				} else {
+					$status.text((response && response.data && response.data.message) || bvcgData.strings.error).addClass('bvcg-error');
+				}
+			}).fail(function () {
+				$status.text(bvcgData.strings.error).addClass('bvcg-error');
+			}).always(function () {
+				$button.prop('disabled', false);
+			});
+		});
+
 		$(document).on('input change', '#bvcg_attribute, #bvcg_prefix, #bvcg_start, #bvcg_end, #bvcg_digits, #bvcg_price, #bvcg_sku_prefix, #bvcg_stock_qty, #bvcg_seo_title, #bvcg_seo_alt, #bvcg_seo_caption, #bvcg_seo_description, #product-type', function () {
 			schedulePreview();
 		});

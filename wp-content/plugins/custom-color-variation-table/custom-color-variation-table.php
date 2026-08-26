@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-ccvt-quantity-pricing.php';
+
 class Custom_Color_Variation_Table {
     private $allowed_quantity_steps = array( 1, 3 );
 
@@ -19,6 +21,7 @@ class Custom_Color_Variation_Table {
     }
 
     public function init() {
+        new CCVT_Quantity_Pricing();
         add_filter( 'woocommerce_locate_template', array( $this, 'locate_template' ), 10, 3 );
         add_filter( 'body_class', array( $this, 'add_body_class' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
@@ -451,6 +454,13 @@ class Custom_Color_Variation_Table {
                     'update_count'    => __( 'Update cart count', 'custom-color-variation-table' ),
                     'out_of_stock'    => __( 'Out of stock', 'custom-color-variation-table' ),
                     'ajax_error'      => __( 'There was a problem adding items to the cart. Please try again.', 'custom-color-variation-table' ),
+                ),
+                'price'    => array(
+                    'symbol'   => html_entity_decode( get_woocommerce_currency_symbol(), ENT_QUOTES, get_bloginfo( 'charset' ) ),
+                    'position' => get_option( 'woocommerce_currency_pos', 'left' ),
+                    'decimals' => wc_get_price_decimals(),
+                    'decimal'  => wc_get_price_decimal_separator(),
+                    'thousand' => wc_get_price_thousand_separator(),
                 ),
             )
         );

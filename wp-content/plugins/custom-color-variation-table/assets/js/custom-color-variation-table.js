@@ -52,6 +52,100 @@
         return variations;
     }
 
+    function getQuantityTiers( $form ) {
+        var tiers = $form.attr( 'data-ccvt-quantity-tiers' ) || '[]';
+
+        try {
+            tiers = JSON.parse( tiers );
+        } catch ( e ) {
+            tiers = [];
+        }
+
+        return Array.isArray( tiers ) ? tiers : [];
+    }
+
+    function getTierPrice( $form, quantity, basePrice ) {
+        var tiers = getQuantityTiers( $form );
+        var qty = Math.max( 1, sanitizeQty( quantity ) );
+        var price = null;
+
+        tiers.some( function( tier ) {
+            var min = parseInt( tier.min, 10 );
+            var max = tier.max === null || tier.max === '' ? null : parseInt( tier.max, 10 );
+
+            if ( ! isNaN( min ) && qty >= min && ( max === null || ( ! isNaN( max ) && qty <= max ) ) ) {
+                price = parseFloat( tier.price );
+                return true;
+            }
+
+            return false;
+        } );
+
+        return price === null || isNaN( price ) ? basePrice : price;
+    }
+
+    function formatPrice( price ) {
+        var settings = ccvt_params.price || {};
+        var decimals = parseInt( settings.decimals, 10 );
+        var value;
+
+        if ( isNaN( decimals ) ) {
+            decimals = 2;
+        }
+
+        value = Number( price ).toFixed( decimals );
+        var parts = value.split( '.' );
+        parts[ 0 ] = parts[ 0 ].replace( /\B(?=(\d{3})+(?!\d))/g, settings.thousand || ',' );
+        value = parts.join( settings.decimal || '.' );
+
+        if ( settings.position === 'right' ) {
+            return value + ( settings.symbol || '' );
+        }
+
+        if ( settings.position === 'left_space' ) {
+            return ( settings.symbol || '' ) + ' ' + value;
+        }
+
+        if ( settings.position === 'right_space' ) {
+            return value + ' ' + ( settings.symbol || '' );
+        }
+
+        return ( settings.symbol || '' ) + value;
+    }
+
+    function updateVariationPrice( $input, quantity ) {
+        var $form = $input.closest( 'form' );
+        var tiers = getQuantityTiers( $form );
+        if ( ! tiers.length ) {
+            return;
+        }
+
+        var basePrice = parseFloat( $input.data( 'base-price' ) );
+
+        if ( isNaN( basePrice ) ) {
+            basePrice = parseFloat( $input.data( 'price' ) );
+            $input.data( 'base-price', basePrice );
+        }
+
+        var price = getTierPrice( $form, quantity, basePrice );
+        $input.data( 'price', price );
+        $input.closest( '.ccvt-variation-row' ).find( '.ccvt-variation-price-value' ).text( formatPrice( price ) );
+
+        $form.find( '.ccvt-price-tier' ).removeClass( 'ccvt-price-tier-active' );
+        var qty = Math.max( 1, sanitizeQty( quantity ) );
+        tiers.some( function( tier, index ) {
+            var min = parseInt( tier.min, 10 );
+            var max = tier.max === null || tier.max === '' ? null : parseInt( tier.max, 10 );
+
+            if ( ! isNaN( min ) && qty >= min && ( max === null || ( ! isNaN( max ) && qty <= max ) ) ) {
+                $form.find( '.ccvt-price-tier' ).eq( index ).addClass( 'ccvt-price-tier-active' );
+                return true;
+            }
+
+            return false;
+        } );
+    }
+
     function getVariationImageData( variation ) {
         if ( ! variation || ! variation.image || ! variation.image.src ) {
             return null;
@@ -711,6 +805,7 @@
             var $input = $( this );
             var $form = $input.closest( 'form' );
             var qty = validateQuantityInput( $input );
+            updateVariationPrice( $input, qty );
             updateButtonCount( $form );
 
             if ( qty > 0 && $input.data( 'variation-id' ) ) {
@@ -796,6 +891,9 @@
         $( '.ccvt-form' ).each( function() {
             var $form = $( this );
             buildVariationGallery( $form );
+            $form.find( '.ccvt-variation-qty' ).each( function() {
+                updateVariationPrice( $( this ), 0 );
+            } );
             updateButtonCount( $form );
         } );
 

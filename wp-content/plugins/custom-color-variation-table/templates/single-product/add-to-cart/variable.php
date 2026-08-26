@@ -51,6 +51,8 @@ if ( ! in_array( $quantity_step, array( 1, 3 ), true ) ) {
     $quantity_step = 1;
 }
 
+$quantity_tiers = CCVT_Quantity_Pricing::get_tiers_for_product( $product );
+
 $variation_ids = array();
 if ( is_array( $available_variations ) && ! empty( $available_variations ) ) {
     foreach ( $available_variations as $variation_data ) {
@@ -126,10 +128,29 @@ foreach ( $variation_ids as $variation_id ) {
 
 <?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
-<form class="variations_form cart ccvt-form" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo wc_esc_json( wp_json_encode( $available_variations ) ); ?>">
+<form class="variations_form cart ccvt-form" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo wc_esc_json( wp_json_encode( $available_variations ) ); ?>" data-ccvt-quantity-tiers="<?php echo esc_attr( wp_json_encode( $quantity_tiers ) ); ?>">
     <?php do_action( 'woocommerce_before_variations_form' ); ?>
 
     <div class="ccvt-notices" aria-live="polite"></div>
+
+    <?php if ( ! empty( $quantity_tiers ) ) : ?>
+        <div class="ccvt-price-tiers" aria-label="<?php esc_attr_e( 'Quantity pricing', 'custom-color-variation-table' ); ?>">
+            <?php foreach ( $quantity_tiers as $tier ) : ?>
+                <span class="ccvt-price-tier" data-tier-min="<?php echo esc_attr( $tier['min'] ); ?>" data-tier-max="<?php echo esc_attr( null === $tier['max'] ? '' : $tier['max'] ); ?>">
+                    <span class="ccvt-price-tier-price">
+                        <strong><?php echo wp_kses_post( wc_price( $tier['price'] ) ); ?></strong>
+                        <?php if ( ! empty( $tier['info'] ) ) : ?>
+                            <button type="button" class="ccvt-price-info" aria-label="<?php esc_attr_e( 'More information about this price tier', 'custom-color-variation-table' ); ?>" aria-describedby="<?php echo esc_attr( 'ccvt-price-info-tooltip-' . $tier['min'] ); ?>">
+                                <span aria-hidden="true">i</span>
+                                <span id="<?php echo esc_attr( 'ccvt-price-info-tooltip-' . $tier['min'] ); ?>" class="ccvt-price-info-tooltip" role="tooltip"><?php echo esc_html( $tier['info'] ); ?></span>
+                            </button>
+                        <?php endif; ?>
+                    </span>
+                    <small><?php echo esc_html( null === $tier['max'] ? sprintf( __( '%d+', 'custom-color-variation-table' ), $tier['min'] ) : sprintf( __( '%d-%d', 'custom-color-variation-table' ), $tier['min'], $tier['max'] ) ); ?></small>
+                </span>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
     <select name="variation_id" style="display: none;"><option value=""></option></select>
 
