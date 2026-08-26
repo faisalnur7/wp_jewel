@@ -28,6 +28,7 @@ class Custom_Color_Variation_Table {
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_cart_assets' ) );
         add_action( 'wp', array( $this, 'maybe_remove_single_product_summary_parts' ) );
         add_action( 'ccvt_render_related_product_carousels', array( $this, 'render_related_product_carousels' ) );
+        add_filter( 'elementor/query/query_args', array( $this, 'filter_product_archive_loop_query' ), 20, 2 );
         add_filter( 'woocommerce_quantity_input_args', array( $this, 'filter_quantity_input_args' ), 10, 2 );
         add_filter( 'woocommerce_cart_item_quantity', array( $this, 'render_cart_item_quantity' ), 10, 3 );
         add_action( 'woocommerce_product_options_inventory_product_data', array( $this, 'render_quantity_step_field' ) );
@@ -246,6 +247,41 @@ class Custom_Color_Variation_Table {
         }
 
         return $classes;
+    }
+
+    /**
+     * Keeps Elementor product Loop Grids scoped to the current product category.
+     *
+     * @param array    $query_args Query arguments.
+     * @param object   $widget    Elementor widget.
+     * @return array
+     */
+    public function filter_product_archive_loop_query( $query_args, $widget ) {
+        if ( ! function_exists( 'is_product_category' ) || ! is_product_category() || ! is_object( $widget ) || ! method_exists( $widget, 'get_name' ) || 'loop-grid' !== $widget->get_name() ) {
+            return $query_args;
+        }
+
+        if ( method_exists( $widget, 'get_current_skin_id' ) && 'product' !== $widget->get_current_skin_id() ) {
+            return $query_args;
+        }
+
+        $term_id = absint( get_queried_object_id() );
+
+        if ( ! $term_id ) {
+            return $query_args;
+        }
+
+        if ( empty( $query_args['tax_query'] ) || ! is_array( $query_args['tax_query'] ) ) {
+            $query_args['tax_query'] = array();
+        }
+
+        $query_args['tax_query'][] = array(
+            'taxonomy' => 'product_cat',
+            'field'    => 'term_id',
+            'terms'    => $term_id,
+        );
+
+        return $query_args;
     }
 
     private function get_variable_product_ids( $exclude_ids = array(), $category_ids = array(), $category_operator = 'IN', $limit = 8 ) {
